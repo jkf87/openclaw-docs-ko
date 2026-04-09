@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://jkf87.github.io/openclaw-docs-ko/sitemap.xml
