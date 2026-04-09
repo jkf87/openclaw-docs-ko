@@ -158,4 +158,4 @@ tailscale serve status
 - [원격 액세스](/gateway/remote) -- SSH 터널 및 tailnet 설정
 - [인증](/gateway/authentication) -- 게이트웨이 인증 모드
 - [신뢰할 수 있는 프록시 인증](/gateway/trusted-proxy-auth) -- 신원 인식 프록시 설정
-- [보안](/gateway/security)
+- [보안](/gateway/security/)

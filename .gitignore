@@ -10,3 +10,7 @@ site/docs/public/
 
 # Original repo (not needed in deploy repo)
 repo/
+
+# OMC runtime state and artifacts
+.omc/
+.omx/

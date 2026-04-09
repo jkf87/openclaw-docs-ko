@@ -403,6 +403,6 @@ IAM 역할 세부 정보는 [https://cloud.google.com/iam/docs/understanding-rol
 
 ## 다음 단계
 
-- 메시징 채널 설정: [채널](/channels)
-- 로컬 장치를 노드로 페어링: [노드](/nodes)
+- 메시징 채널 설정: [채널](/channels/)
+- 로컬 장치를 노드로 페어링: [노드](/nodes/)
 - Gateway 구성: [Gateway 구성](/gateway/configuration)

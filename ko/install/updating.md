@@ -136,6 +136,6 @@ openclaw gateway restart
 
 ## 관련 항목
 
-- [설치 개요](/install) — 모든 설치 방법
+- [설치 개요](/install/) — 모든 설치 방법
 - [Doctor](/gateway/doctor) — 업데이트 후 상태 점검
 - [마이그레이션](/install/migrating) — 주요 버전 마이그레이션 가이드

@@ -12,7 +12,7 @@ title: "security"
 
 관련:
 
-- 보안 가이드: [보안](/gateway/security)
+- 보안 가이드: [보안](/gateway/security/)
 
 ## 감사
 
@@ -39,7 +39,7 @@ npm 기반 플러그인/훅 설치 레코드가 고정되지 않거나 무결성
 채널 허용 목록이 안정적인 ID 대신 변경 가능한 이름/이메일/태그에 의존할 때 경고합니다 (해당되는 경우 Discord, Slack, Google Chat, Microsoft Teams, Mattermost, IRC 범위).
 `gateway.auth.mode="none"`이 공유 비밀 없이 Gateway HTTP API에 접근 가능하게 할 때 경고합니다 (`/tools/invoke` 및 활성화된 `/v1/*` 엔드포인트).
 `dangerous`/`dangerously` 접두사가 붙은 설정은 명시적인 브레이크 글래스 운영자 재정의입니다; 하나를 활성화하는 것 자체는 보안 취약성 보고서가 아닙니다.
-완전한 위험 매개변수 목록은 [보안](/gateway/security)의 "안전하지 않거나 위험한 플래그 요약" 섹션을 참조하세요.
+완전한 위험 매개변수 목록은 [보안](/gateway/security/)의 "안전하지 않거나 위험한 플래그 요약" 섹션을 참조하세요.
 
 SecretRef 동작:
 

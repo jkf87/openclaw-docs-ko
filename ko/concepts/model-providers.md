@@ -768,4 +768,4 @@ openclaw models list
 - [모델](/concepts/models) — 모델 구성 및 별칭
 - [모델 장애 조치](/concepts/model-failover) — 폴백 체인 및 재시도 동작
 - [구성 참조](/gateway/configuration-reference#agent-defaults) — 모델 구성 키
-- [프로바이더](/providers) — 프로바이더별 설정 가이드
+- [프로바이더](/providers/) — 프로바이더별 설정 가이드

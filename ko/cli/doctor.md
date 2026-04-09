@@ -13,7 +13,7 @@ title: "doctor"
 관련:
 
 - 문제 해결: [문제 해결](/gateway/troubleshooting)
-- 보안 감사: [보안](/gateway/security)
+- 보안 감사: [보안](/gateway/security/)
 
 ## 예시
 

@@ -74,4 +74,4 @@ title: "리액션"
 ## 관련 항목
 
 - [에이전트 전송](/tools/agent-send) — `react`를 포함한 `message` 도구
-- [채널](/channels) — 채널별 설정
+- [채널](/channels/) — 채널별 설정

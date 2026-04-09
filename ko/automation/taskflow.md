@@ -78,5 +78,5 @@ openclaw tasks flow cancel <lookup>
 
 - [백그라운드 태스크](/automation/tasks) — 플로우가 조율하는 분리된 작업 원장
 - [CLI: 태스크](/cli/index#tasks) — `openclaw tasks flow`의 CLI 명령 참조
-- [자동화 개요](/automation) — 한눈에 보는 모든 자동화 메커니즘
+- [자동화 개요](/automation/) — 한눈에 보는 모든 자동화 메커니즘
 - [크론 작업](/automation/cron-jobs) — 플로우에 공급될 수 있는 예약된 작업

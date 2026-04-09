@@ -9,7 +9,7 @@ read_when:
 
 # Node.js
 
-OpenClaw에는 **Node 22.14 이상**이 필요합니다. **Node 24가 설치, CI 및 릴리즈 워크플로우의 기본 권장 런타임입니다.** Node 22는 활성 LTS 라인을 통해 계속 지원됩니다. [설치 프로그램 스크립트](/install#alternative-install-methods)는 Node를 자동으로 감지하고 설치합니다 — 이 페이지는 Node를 직접 설정하고 모든 것이 올바르게 연결되었는지 확인하려는 경우를 위한 것입니다(버전, PATH, 전역 설치).
+OpenClaw에는 **Node 22.14 이상**이 필요합니다. **Node 24가 설치, CI 및 릴리즈 워크플로우의 기본 권장 런타임입니다.** Node 22는 활성 LTS 라인을 통해 계속 지원됩니다. [설치 프로그램 스크립트](/install/#alternative-install-methods)는 Node를 자동으로 감지하고 설치합니다 — 이 페이지는 Node를 직접 설정하고 모든 것이 올바르게 연결되었는지 확인하려는 경우를 위한 것입니다(버전, PATH, 전역 설치).
 
 ## 버전 확인
 
@@ -139,6 +139,6 @@ export PATH="$HOME/.npm-global/bin:$PATH"
 
 ## 관련 항목
 
-- [설치 개요](/install) — 모든 설치 방법
+- [설치 개요](/install/) — 모든 설치 방법
 - [업데이트](/install/updating) — OpenClaw를 최신 상태로 유지
 - [시작하기](/start/getting-started) — 설치 후 첫 단계

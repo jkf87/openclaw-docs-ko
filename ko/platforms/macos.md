@@ -199,7 +199,7 @@ macOS 앱이 **원격** 모드로 실행되면 로컬 UI 구성 요소가 로컬
 
 ## 관련 문서
 
-- [게이트웨이 런북](/gateway)
+- [게이트웨이 런북](/gateway/)
 - [게이트웨이 (macOS)](/platforms/mac/bundled-gateway)
 - [macOS 권한](/platforms/mac/permissions)
 - [Canvas](/platforms/mac/canvas)

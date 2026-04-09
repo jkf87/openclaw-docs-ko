@@ -403,8 +403,8 @@ Matrix 승인 프롬프트는 기본 승인 메시지에 반응 단축키를 씁
 
 ## 관련 문서
 
-- [채널 개요](/channels)
+- [채널 개요](/channels/)
 - [페어링](/channels/pairing)
 - [그룹](/channels/groups)
 - [채널 라우팅](/channels/channel-routing)
-- [보안](/gateway/security)
+- [보안](/gateway/security/)

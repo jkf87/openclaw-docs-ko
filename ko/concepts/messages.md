@@ -138,4 +138,4 @@ OpenClaw는 모델 추론을 노출하거나 숨길 수 있습니다:
 - [스트리밍](/concepts/streaming) — 실시간 메시지 전달
 - [재시도](/concepts/retry) — 메시지 전달 재시도 동작
 - [큐](/concepts/queue) — 메시지 처리 큐
-- [채널](/channels) — 메시징 플랫폼 통합
+- [채널](/channels/) — 메시징 플랫폼 통합

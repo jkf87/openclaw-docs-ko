@@ -429,6 +429,6 @@ Diff 렌더링 엔진:
 
 ## 관련 문서
 
-- [도구 개요](/tools)
+- [도구 개요](/tools/)
 - [플러그인](/tools/plugin)
 - [브라우저](/tools/browser)

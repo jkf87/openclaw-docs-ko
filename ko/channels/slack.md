@@ -531,7 +531,7 @@ openclaw pairing list slack
 
 - [페어링](/channels/pairing)
 - [그룹](/channels/groups)
-- [보안](/gateway/security)
+- [보안](/gateway/security/)
 - [채널 라우팅](/channels/channel-routing)
 - [문제 해결](/channels/troubleshooting)
 - [구성](/gateway/configuration)

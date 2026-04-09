@@ -140,7 +140,7 @@ title: "FAQ"
     - **Tailnet 바인딩**: `openclaw gateway --bind tailnet --token "<token>"` 실행, `http://<tailscale-ip>:18789/` 열기.
     - **SSH 터널**: `ssh -N -L 18789:127.0.0.1:18789 user@host` 후 `http://127.0.0.1:18789/` 열기.
 
-    [대시보드](/web/dashboard) 및 [웹 표면](/web)을 참조하십시오.
+    [대시보드](/web/dashboard) 및 [웹 표면](/web/)을 참조하십시오.
 
   </Accordion>
 
@@ -150,7 +150,7 @@ title: "FAQ"
 
     여유 공간(로그, 미디어, 기타 서비스)이 더 필요한 경우 **2GB가 권장**되지만 절대 최소값은 아닙니다.
 
-    팁: 소형 Pi/VPS가 게이트웨이를 호스팅할 수 있으며 노트북/폰에 **노드**를 페어링하여 로컬 화면/카메라/canvas 또는 명령 실행에 사용할 수 있습니다. [노드](/nodes)를 참조하십시오.
+    팁: 소형 Pi/VPS가 게이트웨이를 호스팅할 수 있으며 노트북/폰에 **노드**를 페어링하여 로컬 화면/카메라/canvas 또는 명령 실행에 사용할 수 있습니다. [노드](/nodes/)를 참조하십시오.
 
   </Accordion>
 

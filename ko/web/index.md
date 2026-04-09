@@ -103,7 +103,7 @@ openclaw gateway
 - 비루프백 Control UI 배포의 경우 `gateway.controlUi.allowedOrigins`를 명시적으로 설정하십시오 (전체 origin). 그렇지 않으면 게이트웨이 시작이 기본적으로 거부됩니다.
 - `gateway.controlUi.dangerouslyAllowHostHeaderOriginFallback=true`는 호스트 헤더 origin 폴백 모드를 활성화하지만 위험한 보안 다운그레이드입니다.
 - Serve의 경우 `gateway.auth.allowTailscale`이 `true`이면 Tailscale 아이덴티티 헤더가 Control UI/WebSocket 인증을 충족할 수 있습니다 (토큰/비밀번호 불필요).
-  HTTP API 엔드포인트는 해당 Tailscale 아이덴티티 헤더를 사용하지 않고 게이트웨이의 일반 HTTP 인증 모드를 따릅니다. 명시적 자격 증명을 요구하려면 `gateway.auth.allowTailscale: false`를 설정하십시오. [Tailscale](/gateway/tailscale) 및 [보안](/gateway/security)을 참조하십시오. 이 토큰 없는 흐름은 게이트웨이 호스트가 신뢰할 수 있다고 가정합니다.
+  HTTP API 엔드포인트는 해당 Tailscale 아이덴티티 헤더를 사용하지 않고 게이트웨이의 일반 HTTP 인증 모드를 따릅니다. 명시적 자격 증명을 요구하려면 `gateway.auth.allowTailscale: false`를 설정하십시오. [Tailscale](/gateway/tailscale) 및 [보안](/gateway/security/)을 참조하십시오. 이 토큰 없는 흐름은 게이트웨이 호스트가 신뢰할 수 있다고 가정합니다.
 - `gateway.tailscale.mode: "funnel"`은 `gateway.auth.mode: "password"` (공유 비밀번호)가 필요합니다.
 
 ## UI 빌드

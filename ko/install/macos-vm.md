@@ -14,7 +14,7 @@ title: "macOS VM"
 
 - **소형 Linux VPS** - 상시 가동 Gateway와 저렴한 비용. [VPS 호스팅](/vps) 참조.
 - **전용 하드웨어** (Mac mini 또는 Linux 박스) - 완전한 제어와 브라우저 자동화에 필요한 **주거용 IP**를 원하는 경우. 많은 사이트가 데이터 센터 IP를 차단하므로 로컬 브라우징이 더 잘 작동하는 경우가 많습니다.
-- **하이브리드:** 저렴한 VPS에 Gateway를 유지하고, 브라우저/UI 자동화가 필요할 때 Mac을 **노드**로 연결합니다. [노드](/nodes) 및 [Gateway 원격](/gateway/remote) 참조.
+- **하이브리드:** 저렴한 VPS에 Gateway를 유지하고, 브라우저/UI 자동화가 필요할 때 Mac을 **노드**로 연결합니다. [노드](/nodes/) 및 [Gateway 원격](/gateway/remote) 참조.
 
 macOS 전용 기능(iMessage/BlueBubbles)이 필요하거나 일상 Mac으로부터 엄격한 격리를 원하는 경우에만 macOS VM을 사용합니다.
 
@@ -272,7 +272,7 @@ VM을 계속 실행하려면:
 ## 관련 문서
 
 - [VPS 호스팅](/vps)
-- [노드](/nodes)
+- [노드](/nodes/)
 - [Gateway 원격](/gateway/remote)
 - [BlueBubbles 채널](/channels/bluebubbles)
 - [Lume 빠른 시작](https://cua.ai/docs/lume/guide/getting-started/quickstart)

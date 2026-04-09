@@ -11,7 +11,7 @@ title: "프로바이더 디렉터리"
 OpenClaw는 다양한 LLM 프로바이더를 사용할 수 있습니다. 프로바이더를 선택하고 인증한 후
 기본 모델을 `provider/model` 형식으로 설정하십시오.
 
-채널 문서(WhatsApp/Telegram/Discord/Slack/Mattermost (플러그인) 등)를 찾고 계십니까? [채널](/channels)을 참조하십시오.
+채널 문서(WhatsApp/Telegram/Discord/Slack/Mattermost (플러그인) 등)를 찾고 계십니까? [채널](/channels/)을 참조하십시오.
 
 ## 빠른 시작
 

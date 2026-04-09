@@ -31,7 +31,7 @@ title: "Linux 앱"
 
 ## 게이트웨이
 
-- [게이트웨이 런북](/gateway)
+- [게이트웨이 런북](/gateway/)
 - [구성](/gateway/configuration)
 
 ## 게이트웨이 서비스 설치 (CLI)
@@ -64,7 +64,7 @@ openclaw doctor
 
 ## 시스템 제어 (systemd 사용자 유닛)
 
-OpenClaw는 기본적으로 systemd **사용자** 서비스를 설치합니다. 공유 또는 항상 켜져 있는 서버에는 **시스템** 서비스를 사용하십시오. `openclaw gateway install`과 `openclaw onboard --install-daemon`은 이미 현재 정규 유닛을 렌더링합니다. 사용자 지정 시스템/서비스 관리자 설정이 필요한 경우에만 수동으로 작성하십시오. 전체 서비스 지침은 [게이트웨이 런북](/gateway)에 있습니다.
+OpenClaw는 기본적으로 systemd **사용자** 서비스를 설치합니다. 공유 또는 항상 켜져 있는 서버에는 **시스템** 서비스를 사용하십시오. `openclaw gateway install`과 `openclaw onboard --install-daemon`은 이미 현재 정규 유닛을 렌더링합니다. 사용자 지정 시스템/서비스 관리자 설정이 필요한 경우에만 수동으로 작성하십시오. 전체 서비스 지침은 [게이트웨이 런북](/gateway/)에 있습니다.
 
 최소 설정:
 

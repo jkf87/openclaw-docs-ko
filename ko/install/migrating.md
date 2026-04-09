@@ -42,7 +42,7 @@ title: "마이그레이션 가이드"
   </Step>
 
   <Step title="새 머신에 OpenClaw 설치">
-    새 머신에 CLI (및 필요한 경우 Node)를 [설치](/install)합니다.
+    새 머신에 CLI (및 필요한 경우 Node)를 [설치](/install/)합니다.
     온보딩이 새 `~/.openclaw/`를 생성해도 괜찮습니다 — 다음 단계에서 덮어씁니다.
   </Step>
 

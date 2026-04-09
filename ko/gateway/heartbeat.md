@@ -8,7 +8,7 @@ title: "하트비트"
 
 # 하트비트 (게이트웨이)
 
-> **하트비트 vs Cron?** 각각을 언제 사용할지에 대한 가이드는 [자동화 및 작업](/automation)을 참조하십시오.
+> **하트비트 vs Cron?** 각각을 언제 사용할지에 대한 가이드는 [자동화 및 작업](/automation/)을 참조하십시오.
 
 하트비트는 메인 세션에서 **주기적인 에이전트 턴**을 실행하여 모델이 스팸 없이 주의가 필요한 것을 표면화할 수 있습니다.
 
@@ -341,7 +341,7 @@ openclaw system event --text "Check for urgent follow-ups" --mode now
 
 ## 관련 항목
 
-- [자동화 및 작업](/automation) — 한눈에 보는 모든 자동화 메커니즘
+- [자동화 및 작업](/automation/) — 한눈에 보는 모든 자동화 메커니즘
 - [백그라운드 작업](/automation/tasks) — 분리된 작업 추적 방법
 - [타임존](/concepts/timezone) — 타임존이 하트비트 스케줄링에 미치는 영향
 - [문제 해결](/automation/cron-jobs#troubleshooting) — 자동화 문제 디버깅

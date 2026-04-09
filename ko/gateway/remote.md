@@ -48,7 +48,7 @@ title: "원격 액세스"
 - 다른 머신에서 노트북으로 SSH 터널을 사용하거나,
 - Tailscale Serve로 Control UI를 서빙하고 게이트웨이를 루프백 전용으로 유지합니다.
 
-가이드: [Tailscale](/gateway/tailscale) 및 [웹 개요](/web).
+가이드: [Tailscale](/gateway/tailscale) 및 [웹 개요](/web/).
 
 ## 명령 흐름 (무엇이 어디서 실행되는가)
 
@@ -132,7 +132,7 @@ WebChat은 더 이상 별도의 HTTP 포트를 사용하지 않습니다. SwiftU
 - **Tailscale Serve**는 `gateway.auth.allowTailscale: true`일 때 신원 헤더를 통해 Control UI/WebSocket 트래픽을 인증할 수 있습니다.
 - **신뢰할 수 있는 프록시** 인증은 비루프백 신원 인식 프록시 설정 전용입니다.
 
-심층 분석: [보안](/gateway/security).
+심층 분석: [보안](/gateway/security/).
 
 ### macOS: LaunchAgent를 통한 영구 SSH 터널
 

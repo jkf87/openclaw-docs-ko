@@ -1693,7 +1693,7 @@ Anthropic setup-token은 지원되는 토큰 인증 경로로 남아 있지만, 
 
 ## 노드
 
-`nodes`는 Gateway와 통신하고 페어링된 노드를 대상으로 합니다. [/nodes](/nodes) 참조.
+`nodes`는 Gateway와 통신하고 페어링된 노드를 대상으로 합니다. [/nodes](/nodes/) 참조.
 
 공통 옵션:
 

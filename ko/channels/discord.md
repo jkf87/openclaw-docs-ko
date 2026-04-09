@@ -660,7 +660,7 @@ OpenClaw는 Discord 연결 상태를 모니터링합니다. 봇이 예상치 않
 
 - [페어링](/channels/pairing)
 - [그룹](/channels/groups)
-- [보안](/gateway/security)
+- [보안](/gateway/security/)
 - [채널 라우팅](/channels/channel-routing)
 - [문제 해결](/channels/troubleshooting)
 - [슬래시 명령](/tools/slash-commands)

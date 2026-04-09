@@ -16,7 +16,7 @@ title: "approvals"
 관련:
 
 - Exec 승인: [Exec 승인](/tools/exec-approvals)
-- 노드: [노드](/nodes)
+- 노드: [노드](/nodes/)
 
 ## 일반 명령
 

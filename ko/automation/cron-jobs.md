@@ -372,7 +372,7 @@ openclaw doctor
 
 ## 관련 항목
 
-- [자동화 및 태스크](/automation) — 한눈에 보는 모든 자동화 메커니즘
+- [자동화 및 태스크](/automation/) — 한눈에 보는 모든 자동화 메커니즘
 - [백그라운드 태스크](/automation/tasks) — 크론 실행을 위한 태스크 원장
 - [하트비트](/gateway/heartbeat) — 주기적인 메인 세션 턴
 - [시간대](/concepts/timezone) — 시간대 설정

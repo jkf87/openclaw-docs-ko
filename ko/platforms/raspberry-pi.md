@@ -410,4 +410,4 @@ echo 'wireless-power off' | sudo tee -a /etc/network/interfaces
 - [DigitalOcean 가이드](/platforms/digitalocean) — 클라우드 대안
 - [Hetzner 가이드](/install/hetzner) — Docker 설정
 - [Tailscale](/gateway/tailscale) — 원격 접근
-- [노드](/nodes) — 노트북/전화를 Pi 게이트웨이와 페어링
+- [노드](/nodes/) — 노트북/전화를 Pi 게이트웨이와 페어링

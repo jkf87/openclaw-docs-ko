@@ -15,13 +15,13 @@ title: "페어링"
 1. **DM 페어링** (봇과 대화할 수 있는 사용자)
 2. **노드 페어링** (게이트웨이 네트워크에 참여 가능한 디바이스/노드)
 
-보안 컨텍스트: [보안](/gateway/security)
+보안 컨텍스트: [보안](/gateway/security/)
 
 ## 1) DM 페어링 (인바운드 채팅 접근)
 
 채널이 DM 정책 `pairing`으로 구성된 경우, 알 수 없는 발신자는 짧은 코드를 받고 승인될 때까지 메시지가 **처리되지 않습니다**.
 
-기본 DM 정책은 다음에 문서화되어 있습니다: [보안](/gateway/security)
+기본 DM 정책은 다음에 문서화되어 있습니다: [보안](/gateway/security/)
 
 페어링 코드:
 
@@ -115,7 +115,7 @@ openclaw devices reject <requestId>
 
 ## 관련 문서
 
-- 보안 모델 + 프롬프트 인젝션: [보안](/gateway/security)
+- 보안 모델 + 프롬프트 인젝션: [보안](/gateway/security/)
 - 안전하게 업데이트(doctor 실행): [업데이트](/install/updating)
 - 채널 구성:
   - Telegram: [Telegram](/channels/telegram)

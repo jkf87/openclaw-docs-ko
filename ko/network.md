@@ -24,8 +24,8 @@ title: "네트워크"
 
 - [게이트웨이 아키텍처](/concepts/architecture)
 - [게이트웨이 프로토콜](/gateway/protocol)
-- [게이트웨이 런북](/gateway)
-- [웹 서피스 + 바인드 모드](/web)
+- [게이트웨이 런북](/gateway/)
+- [웹 서피스 + 바인드 모드](/web/)
 
 ## 페어링 + 신원
 
@@ -49,14 +49,14 @@ title: "네트워크"
 
 ## 노드 + 전송
 
-- [노드 개요](/nodes)
+- [노드 개요](/nodes/)
 - [브리지 프로토콜 (레거시 노드, 역사적)](/gateway/bridge-protocol)
 - [노드 런북: iOS](/platforms/ios)
 - [노드 런북: Android](/platforms/android)
 
 ## 보안
 
-- [보안 개요](/gateway/security)
+- [보안 개요](/gateway/security/)
 - [게이트웨이 구성 참조](/gateway/configuration)
 - [문제 해결](/gateway/troubleshooting)
 - [Doctor](/gateway/doctor)

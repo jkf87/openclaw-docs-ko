@@ -124,6 +124,6 @@ DigitalOcean Droplet에서 영구적인 OpenClaw Gateway를 실행합니다.
 
 ## 다음 단계
 
-- [채널](/channels) -- Telegram, WhatsApp, Discord 등 연결
+- [채널](/channels/) -- Telegram, WhatsApp, Discord 등 연결
 - [Gateway 구성](/gateway/configuration) -- 모든 구성 옵션
 - [업데이트](/install/updating) -- OpenClaw를 최신 상태로 유지

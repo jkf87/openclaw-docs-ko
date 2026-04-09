@@ -39,7 +39,7 @@ sidebarTitle: "Linux 서버"
 - VPS를 진실 소스로 취급하고 상태 + 워크스페이스를 정기적으로 **백업**하십시오.
 - 안전한 기본값: 게이트웨이를 루프백에 유지하고 SSH 터널 또는 Tailscale Serve를 통해 접근하십시오. `lan` 또는 `tailnet`에 바인드하는 경우 `gateway.auth.token` 또는 `gateway.auth.password`를 요구하십시오.
 
-관련 페이지: [게이트웨이 원격 접근](/gateway/remote), [플랫폼 허브](/platforms).
+관련 페이지: [게이트웨이 원격 접근](/gateway/remote), [플랫폼 허브](/platforms/).
 
 ## VPS에서 공유 회사 에이전트
 
@@ -49,13 +49,13 @@ sidebarTitle: "Linux 서버"
 - 해당 런타임을 개인 Apple/Google 계정이나 개인 브라우저/패스워드 매니저 프로파일에 로그인하지 마십시오.
 - 사용자들이 서로에게 적대적인 경우 게이트웨이/호스트/OS 사용자별로 분리하십시오.
 
-보안 모델 세부 사항: [보안](/gateway/security).
+보안 모델 세부 사항: [보안](/gateway/security/).
 
 ## VPS와 함께 노드 사용
 
 클라우드에 게이트웨이를 유지하고 로컬 기기(Mac/iOS/Android/헤드리스)에 **노드**를 페어링할 수 있습니다. 노드는 게이트웨이가 클라우드에 있는 동안 로컬 화면/카메라/Canvas와 `system.run` 기능을 제공합니다.
 
-문서: [노드](/nodes), [노드 CLI](/cli/nodes).
+문서: [노드](/nodes/), [노드 CLI](/cli/nodes).
 
 ## 소형 VM 및 ARM 호스트를 위한 시작 튜닝
 

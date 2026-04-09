@@ -261,7 +261,7 @@ title: "Azure"
     rm -f /tmp/install.sh
     ```
 
-    설치 프로그램은 아직 없는 경우 Node LTS 및 종속성을 설치하고, OpenClaw를 설치한 후 온보딩 마법사를 시작합니다. 자세한 내용은 [설치](/install)를 참조하십시오.
+    설치 프로그램은 아직 없는 경우 Node LTS 및 종속성을 설치하고, OpenClaw를 설치한 후 온보딩 마법사를 시작합니다. 자세한 내용은 [설치](/install/)를 참조하십시오.
 
   </Step>
 
@@ -305,7 +305,7 @@ az group delete -n "${RG}" --yes --no-wait
 
 ## 다음 단계
 
-- 메시징 채널 설정: [채널](/channels)
-- 로컬 장치를 노드로 페어링: [노드](/nodes)
+- 메시징 채널 설정: [채널](/channels/)
+- 로컬 장치를 노드로 페어링: [노드](/nodes/)
 - Gateway 구성: [Gateway 구성](/gateway/configuration)
 - GitHub Copilot 모델 제공자를 사용한 Azure OpenClaw 배포에 대한 자세한 내용: [GitHub Copilot을 사용한 Azure OpenClaw](https://github.com/johnsonshi/openclaw-azure-github-copilot)

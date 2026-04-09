@@ -247,7 +247,7 @@ openclaw cron add \
 
 ## 관련 항목
 
-- [자동화 및 태스크](/automation) — 한눈에 보는 모든 자동화 메커니즘
+- [자동화 및 태스크](/automation/) — 한눈에 보는 모든 자동화 메커니즘
 - [크론 작업](/automation/cron-jobs) — 상시 명령을 위한 일정 실행
 - [훅](/automation/hooks) — 에이전트 수명 주기 이벤트를 위한 이벤트 기반 스크립트
 - [웹훅](/automation/cron-jobs#webhooks) — 인바운드 HTTP 이벤트 트리거

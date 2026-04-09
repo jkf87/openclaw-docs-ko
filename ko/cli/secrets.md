@@ -40,7 +40,7 @@ CI/게이트에 대한 종료 코드 참고:
 
 - 비밀 가이드: [비밀 관리](/gateway/secrets)
 - 자격 증명 표면: [SecretRef 자격 증명 표면](/reference/secretref-credential-surface)
-- 보안 가이드: [보안](/gateway/security)
+- 보안 가이드: [보안](/gateway/security/)
 
 ## 런타임 스냅샷 재로드
 

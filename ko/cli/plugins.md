@@ -15,7 +15,7 @@ Gateway 플러그인/확장, 훅 팩, 호환 번들을 관리합니다.
 - 플러그인 시스템: [플러그인](/tools/plugin)
 - 번들 호환성: [플러그인 번들](/plugins/bundles)
 - 플러그인 매니페스트 + 스키마: [플러그인 매니페스트](/plugins/manifest)
-- 보안 강화: [보안](/gateway/security)
+- 보안 강화: [보안](/gateway/security/)
 
 ## 명령
 

@@ -166,5 +166,5 @@ read_when:
 
 ## 관련 항목
 
-- [도구 개요](/tools) — 모든 사용 가능한 에이전트 도구
+- [도구 개요](/tools/) — 모든 사용 가능한 에이전트 도구
 - [설정 레퍼런스](/gateway/configuration-reference#agent-defaults) — pdfMaxBytesMb 및 pdfMaxPages 설정

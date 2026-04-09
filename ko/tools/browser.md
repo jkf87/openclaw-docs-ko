@@ -791,6 +791,6 @@ WSL2 게이트웨이 + Windows Chrome 분리 호스트 설정은
 
 ## 관련 항목
 
-- [도구 개요](/tools) — 모든 사용 가능한 에이전트 도구
+- [도구 개요](/tools/) — 모든 사용 가능한 에이전트 도구
 - [샌드박싱](/gateway/sandboxing) — 샌드박스 환경에서 브라우저 제어
-- [보안](/gateway/security) — 브라우저 제어 위험 및 강화
+- [보안](/gateway/security/) — 브라우저 제어 위험 및 강화

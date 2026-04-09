@@ -290,7 +290,7 @@ openclaw config set agents.defaults.videoGenerationModel.primary "qwen/wan2.6-t2
 
 ## 관련 항목
 
-- [도구 개요](/tools)
+- [도구 개요](/tools/)
 - [백그라운드 작업](/automation/tasks) -- 비동기 비디오 생성을 위한 작업 추적
 - [Alibaba Model Studio](/providers/alibaba)
 - [BytePlus](/concepts/model-providers#byteplus-international)

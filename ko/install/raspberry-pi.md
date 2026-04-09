@@ -160,6 +160,6 @@ sudo reboot
 
 ## 다음 단계
 
-- [채널](/channels) -- Telegram, WhatsApp, Discord 등 연결
+- [채널](/channels/) -- Telegram, WhatsApp, Discord 등 연결
 - [Tailscale](/gateway/tailscale) -- 안전한 원격 액세스 설정
 - [업데이트](/install/updating) -- OpenClaw를 최신 상태로 유지

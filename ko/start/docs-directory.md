@@ -15,7 +15,7 @@ title: "문서 디렉토리"
 ## 시작하기
 
 - [문서 허브 (전체 페이지 링크)](/start/hubs)
-- [도움말](/help)
+- [도움말](/help/)
 - [구성](/gateway/configuration)
 - [구성 예시](/gateway/configuration-examples)
 - [슬래시 명령](/tools/slash-commands)
@@ -28,9 +28,9 @@ title: "문서 디렉토리"
 - [스킬 구성](/tools/skills-config)
 - [워크스페이스 템플릿](/reference/templates/AGENTS)
 - [RPC 어댑터](/reference/rpc)
-- [게이트웨이 런북](/gateway)
-- [노드 (iOS 및 Android)](/nodes)
-- [웹 표면 (Control UI)](/web)
+- [게이트웨이 런북](/gateway/)
+- [노드 (iOS 및 Android)](/nodes/)
+- [웹 표면 (Control UI)](/web/)
 - [디스커버리 및 트랜스포트](/gateway/discovery)
 - [원격 접근](/gateway/remote)
 
@@ -63,5 +63,5 @@ title: "문서 디렉토리"
 - [크론 작업](/automation/cron-jobs)
 - [웹훅](/automation/cron-jobs#webhooks)
 - [Gmail 훅 (Pub/Sub)](/automation/cron-jobs#gmail-pubsub-integration)
-- [보안](/gateway/security)
+- [보안](/gateway/security/)
 - [문제 해결](/gateway/troubleshooting)

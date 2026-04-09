@@ -537,5 +537,5 @@ Exec 수명 주기는 시스템 메시지로 표시됩니다:
 
 - [Exec](/tools/exec) — 쉘 명령 실행 도구
 - [샌드박싱](/gateway/sandboxing) — 샌드박스 모드 및 워크스페이스 액세스
-- [보안](/gateway/security) — 보안 모델 및 강화
+- [보안](/gateway/security/) — 보안 모델 및 강화
 - [샌드박스 vs 도구 정책 vs Elevated](/gateway/sandbox-vs-tool-policy-vs-elevated) — 각각을 사용하는 경우

@@ -160,7 +160,7 @@ openclaw channels login whatsapp
 # QR 코드 스캔
 ```
 
-다른 공급자는 [채널](/channels)을 참조하십시오.
+다른 공급자는 [채널](/channels/)을 참조하십시오.
 
 ---
 

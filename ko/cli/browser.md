@@ -219,4 +219,4 @@ Gateway가 브라우저와 다른 머신에서 실행되는 경우 Chrome/Brave/
 
 `gateway.nodes.browser.mode`를 사용하여 자동 라우팅을 제어하고 `gateway.nodes.browser.node`를 사용하여 여러 노드가 연결된 경우 특정 노드를 고정하세요.
 
-보안 + 원격 설정: [브라우저 툴](/tools/browser), [원격 액세스](/gateway/remote), [Tailscale](/gateway/tailscale), [보안](/gateway/security)
+보안 + 원격 설정: [브라우저 툴](/tools/browser), [원격 액세스](/gateway/remote), [Tailscale](/gateway/tailscale), [보안](/gateway/security/)

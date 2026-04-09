@@ -716,7 +716,7 @@ dig +short api.telegram.org AAAA
 
 - [페어링](/channels/pairing)
 - [그룹](/channels/groups)
-- [보안](/gateway/security)
+- [보안](/gateway/security/)
 - [채널 라우팅](/channels/channel-routing)
 - [멀티 에이전트 라우팅](/concepts/multi-agent)
 - [문제 해결](/channels/troubleshooting)

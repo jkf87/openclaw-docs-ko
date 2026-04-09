@@ -50,7 +50,7 @@ openclaw doctor
 
 환경 변수를 직접 관리하고 싶지 않다면, 온보딩이 데몬 사용을 위한 API 키를 저장할 수 있습니다: `openclaw onboard`.
 
-환경 상속(`env.shellEnv`, `~/.openclaw/.env`, systemd/launchd)에 대한 자세한 내용은 [도움말](/help)을 참조하십시오.
+환경 상속(`env.shellEnv`, `~/.openclaw/.env`, systemd/launchd)에 대한 자세한 내용은 [도움말](/help/)을 참조하십시오.
 
 ## Anthropic: Claude CLI 및 토큰 호환성
 

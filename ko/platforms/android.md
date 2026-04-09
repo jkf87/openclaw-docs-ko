@@ -16,12 +16,12 @@ title: "Android 앱"
 - 역할: 동반 노드 앱 (Android는 게이트웨이를 호스팅하지 않음).
 - 게이트웨이 필요 여부: 예 (macOS, Linux, 또는 WSL2를 통한 Windows에서 실행).
 - 설치: [시작하기](/start/getting-started) + [페어링](/channels/pairing).
-- 게이트웨이: [런북](/gateway) + [구성](/gateway/configuration).
+- 게이트웨이: [런북](/gateway/) + [구성](/gateway/configuration).
   - 프로토콜: [게이트웨이 프로토콜](/gateway/protocol) (노드 + 제어 플레인).
 
 ## 시스템 제어
 
-시스템 제어 (launchd/systemd)는 게이트웨이 호스트에 있습니다. [게이트웨이](/gateway)를 참조하십시오.
+시스템 제어 (launchd/systemd)는 게이트웨이 호스트에 있습니다. [게이트웨이](/gateway/)를 참조하십시오.
 
 ## 연결 런북
 

@@ -150,4 +150,4 @@ Slack:
 
 - [메시지](/concepts/messages) — 메시지 라이프사이클 및 전달
 - [재시도](/concepts/retry) — 전달 실패 시 재시도 동작
-- [채널](/channels) — 채널별 스트리밍 지원
+- [채널](/channels/) — 채널별 스트리밍 지원

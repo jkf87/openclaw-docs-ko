@@ -153,6 +153,6 @@ ssh -L 18789:127.0.0.1:18789 ubuntu@openclaw
 
 ## 다음 단계
 
-- [채널](/channels) -- Telegram, WhatsApp, Discord 등 연결
+- [채널](/channels/) -- Telegram, WhatsApp, Discord 등 연결
 - [Gateway 구성](/gateway/configuration) -- 모든 구성 옵션
 - [업데이트](/install/updating) -- OpenClaw를 최신 상태로 유지

@@ -173,4 +173,4 @@ openclaw tui --url ws://<host>:<port> --token <gateway-token>
 ## 관련
 
 - [Control UI](/web/control-ui) — 웹 기반 제어 인터페이스
-- [CLI 참조](/cli) — 전체 CLI 명령 참조
+- [CLI 참조](/cli/) — 전체 CLI 명령 참조

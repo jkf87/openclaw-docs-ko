@@ -142,7 +142,7 @@ openclaw health
 - **모델 인증 프로파일**: `~/.openclaw/agents/<agentId>/agent/auth-profiles.json`
 - **파일 기반 비밀 페이로드 (선택 사항)**: `~/.openclaw/secrets.json`
 - **레거시 OAuth 가져오기**: `~/.openclaw/credentials/oauth.json`
-  자세한 내용: [보안](/gateway/security#credential-storage-map).
+  자세한 내용: [보안](/gateway/security/#credential-storage-map).
 
 ## 설정 업데이트 (설정을 망가뜨리지 않고)
 
@@ -157,11 +157,11 @@ Linux 설치는 systemd **사용자** 서비스를 사용합니다. 기본적으
 sudo loginctl enable-linger $USER
 ```
 
-항상 켜져 있거나 멀티 사용자 서버의 경우, 사용자 서비스 대신 **시스템** 서비스를 고려하십시오 (lingering 불필요). systemd 참고 사항은 [게이트웨이 런북](/gateway)을 참조하십시오.
+항상 켜져 있거나 멀티 사용자 서버의 경우, 사용자 서비스 대신 **시스템** 서비스를 고려하십시오 (lingering 불필요). systemd 참고 사항은 [게이트웨이 런북](/gateway/)을 참조하십시오.
 
 ## 관련 문서
 
-- [게이트웨이 런북](/gateway) (플래그, 감독, 포트)
+- [게이트웨이 런북](/gateway/) (플래그, 감독, 포트)
 - [게이트웨이 구성](/gateway/configuration) (구성 스키마 + 예시)
 - [Discord](/channels/discord) 및 [Telegram](/channels/telegram) (응답 태그 + replyToMode 설정)
 - [OpenClaw 어시스턴트 설정](/start/openclaw)

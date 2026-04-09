@@ -59,7 +59,7 @@ openclaw gateway status --json
 
 ## 게이트웨이
 
-- [게이트웨이 런북](/gateway)
+- [게이트웨이 런북](/gateway/)
 - [구성](/gateway/configuration)
 
 ## 게이트웨이 서비스 설치 (CLI)

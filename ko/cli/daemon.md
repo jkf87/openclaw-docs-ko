@@ -50,7 +50,7 @@ openclaw daemon uninstall
 - 토큰 인증에 토큰이 필요하고 `gateway.auth.token`이 SecretRef 관리인 경우 `install`은 SecretRef가 확인 가능한지 검증하지만 확인된 토큰을 서비스 환경 메타데이터에 유지하지 않습니다.
 - 토큰 인증에 토큰이 필요하고 구성된 토큰 SecretRef가 확인되지 않으면 설치가 실패 처리됩니다.
 - `gateway.auth.token`과 `gateway.auth.password`가 모두 구성되고 `gateway.auth.mode`가 설정되지 않은 경우 모드가 명시적으로 설정될 때까지 설치가 차단됩니다.
-- 하나의 호스트에서 의도적으로 여러 게이트웨이를 실행하는 경우 포트, 구성/상태, 워크스페이스를 격리하세요. [/gateway#multiple-gateways-same-host](/gateway#multiple-gateways-same-host)를 참조하세요.
+- 하나의 호스트에서 의도적으로 여러 게이트웨이를 실행하는 경우 포트, 구성/상태, 워크스페이스를 격리하세요. [/gateway#multiple-gateways-same-host](/gateway/#multiple-gateways-same-host)를 참조하세요.
 
 ## 권장 사항
 

@@ -12,7 +12,7 @@ title: "nodes"
 
 관련:
 
-- 노드 개요: [노드](/nodes)
+- 노드 개요: [노드](/nodes/)
 - 카메라: [카메라 노드](/nodes/camera)
 - 이미지: [이미지 노드](/nodes/images)
 

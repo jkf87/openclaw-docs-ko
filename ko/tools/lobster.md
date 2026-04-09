@@ -341,6 +341,6 @@ OpenProse는 Lobster와 잘 짝을 이룹니다. `/prose`를 사용하여 멀티
 
 ## 관련 항목
 
-- [자동화 및 작업](/automation) — Lobster 워크플로우 예약
-- [자동화 개요](/automation) — 모든 자동화 메커니즘
-- [도구 개요](/tools) — 모든 사용 가능한 에이전트 도구
+- [자동화 및 작업](/automation/) — Lobster 워크플로우 예약
+- [자동화 개요](/automation/) — 모든 자동화 메커니즘
+- [도구 개요](/tools/) — 모든 사용 가능한 에이전트 도구

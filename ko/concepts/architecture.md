@@ -95,7 +95,7 @@ sequenceDiagram
 - **비로컬** 연결은 여전히 명시적 승인이 필요합니다.
 - 게이트웨이 인증 (`gateway.auth.*`)은 로컬이든 원격이든 **모든** 연결에 적용됩니다.
 
-세부사항: [게이트웨이 프로토콜](/gateway/protocol), [페어링](/channels/pairing), [보안](/gateway/security).
+세부사항: [게이트웨이 프로토콜](/gateway/protocol), [페어링](/channels/pairing), [보안](/gateway/security/).
 
 ## 프로토콜 타이핑 및 코드 생성
 
@@ -132,4 +132,4 @@ sequenceDiagram
 - [에이전트 루프](/concepts/agent-loop) — 상세 에이전트 실행 사이클
 - [게이트웨이 프로토콜](/gateway/protocol) — WebSocket 프로토콜 계약
 - [큐](/concepts/queue) — 커맨드 큐 및 동시성
-- [보안](/gateway/security) — 신뢰 모델 및 강화
+- [보안](/gateway/security/) — 신뢰 모델 및 강화

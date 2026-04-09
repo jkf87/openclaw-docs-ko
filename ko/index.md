@@ -125,7 +125,7 @@ flowchart LR
 게이트웨이 시작 후 브라우저 Control UI를 여십시오.
 
 - 로컬 기본값: [http://127.0.0.1:18789/](http://127.0.0.1:18789/)
-- 원격 접근: [웹 서피스](/web) 및 [Tailscale](/gateway/tailscale)
+- 원격 접근: [웹 서피스](/web/) 및 [Tailscale](/gateway/tailscale)
 
 <p align="center">
   <img src="/whatsapp-openclaw.jpg" alt="OpenClaw" width="420" />
@@ -167,10 +167,10 @@ flowchart LR
   <Card title="채널" href="/channels/telegram" icon="message-square">
     Feishu, Microsoft Teams, WhatsApp, Telegram, Discord 등의 채널별 설정.
   </Card>
-  <Card title="노드" href="/nodes" icon="smartphone">
+  <Card title="노드" href="/nodes/" icon="smartphone">
     페어링, Canvas, 카메라, 기기 동작이 포함된 iOS 및 Android 노드.
   </Card>
-  <Card title="도움말" href="/help" icon="life-buoy">
+  <Card title="도움말" href="/help/" icon="life-buoy">
     일반적인 수정 사항 및 문제 해결 진입점.
   </Card>
 </Columns>
@@ -184,7 +184,7 @@ flowchart LR
   <Card title="멀티에이전트 라우팅" href="/concepts/multi-agent" icon="route">
     워크스페이스 격리 및 에이전트별 세션.
   </Card>
-  <Card title="보안" href="/gateway/security" icon="shield">
+  <Card title="보안" href="/gateway/security/" icon="shield">
     토큰, 허용 목록, 안전 제어.
   </Card>
   <Card title="문제 해결" href="/gateway/troubleshooting" icon="wrench">

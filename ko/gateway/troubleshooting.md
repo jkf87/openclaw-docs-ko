@@ -225,7 +225,7 @@ openclaw gateway status --deep   # 시스템 수준 서비스도 스캔
 - `Gateway start blocked: set gateway.mode=local` 또는 `existing config is missing gateway.mode` → 로컬 게이트웨이 모드가 활성화되지 않았거나 구성 파일이 덮어쓰여 `gateway.mode`를 잃었습니다. 수정: 구성에서 `gateway.mode="local"`을 설정하거나 `openclaw onboard --mode local` / `openclaw setup`을 다시 실행하여 예상되는 로컬 모드 구성을 재스탬프합니다. Podman을 통해 OpenClaw를 실행하는 경우 기본 구성 경로는 `~/.openclaw/openclaw.json`입니다.
 - `refusing to bind gateway ... without auth` → 유효한 게이트웨이 인증 경로(토큰/비밀번호, 또는 구성된 경우 신뢰할 수 있는 프록시) 없이 비루프백 바인딩.
 - `another gateway instance is already listening` / `EADDRINUSE` → 포트 충돌.
-- `Other gateway-like services detected (best effort)` → 오래된 또는 병렬 launchd/systemd/schtasks 유닛이 존재합니다. 대부분의 설정은 머신당 하나의 게이트웨이를 유지해야 합니다. 둘 이상이 필요한 경우 포트 + 구성/상태/워크스페이스를 격리합니다. [/gateway#multiple-gateways-same-host](/gateway#multiple-gateways-same-host)를 참조하십시오.
+- `Other gateway-like services detected (best effort)` → 오래된 또는 병렬 launchd/systemd/schtasks 유닛이 존재합니다. 대부분의 설정은 머신당 하나의 게이트웨이를 유지해야 합니다. 둘 이상이 필요한 경우 포트 + 구성/상태/워크스페이스를 격리합니다. [/gateway#multiple-gateways-same-host](/gateway/#multiple-gateways-same-host)를 참조하십시오.
 
 관련:
 
@@ -258,7 +258,7 @@ openclaw gateway probe --ssh user@gateway-host
 관련:
 
 - [/cli/gateway](/cli/gateway)
-- [/gateway#multiple-gateways-same-host](/gateway#multiple-gateways-same-host)
+- [/gateway#multiple-gateways-same-host](/gateway/#multiple-gateways-same-host)
 - [/gateway/remote](/gateway/remote)
 
 ## 채널 연결됐지만 메시지가 흐르지 않음

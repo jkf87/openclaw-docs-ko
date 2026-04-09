@@ -137,11 +137,29 @@ const HTML_TAGS = new Set([
 const KEEP_COMPONENTS = new Set(['BookBanner'])
 
 function escapeUnknownTags(content) {
-  return content.replace(/<\/?([a-zA-Z][a-zA-Z0-9_-]*)([^>]*?)>/g, (match, tag) => {
+  // Mask code blocks and inline code spans so unknown-tag escaping never
+  // touches user-visible code (e.g. `<agentId>` inside backticks must stay literal).
+  const masked = []
+  const token = (i) => `\u0000OC_CODE_${i}\u0000`
+
+  // Fenced code blocks: ``` ... ``` and ~~~ ... ~~~
+  content = content.replace(/(^|\n)(`{3,}|~{3,})[^\n]*\n[\s\S]*?\n\2[^\n]*(?=\n|$)/g, (m) => {
+    const i = masked.push(m) - 1
+    return token(i)
+  })
+  // Inline code spans: `...`, ``...`...``, etc.
+  content = content.replace(/(`+)(?:(?!\1)[\s\S])+?\1/g, (m) => {
+    const i = masked.push(m) - 1
+    return token(i)
+  })
+
+  content = content.replace(/<\/?([a-zA-Z][a-zA-Z0-9_-]*)([^>]*?)>/g, (match, tag) => {
     if (KEEP_COMPONENTS.has(tag)) return match
     if (HTML_TAGS.has(tag.toLowerCase())) return match
     return match.replace(/</g, '&lt;').replace(/>/g, '&gt;')
   })
+
+  return content.replace(/\u0000OC_CODE_(\d+)\u0000/g, (_, i) => masked[Number(i)])
 }
 
 function convertJsxStyles(content) {

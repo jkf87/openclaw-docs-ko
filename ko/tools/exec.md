@@ -204,4 +204,4 @@ OpenAI 및 OpenAI Codex 모델에 대해 기본적으로 활성화됩니다. 비
 - [Exec 승인](/tools/exec-approvals) — 쉘 명령에 대한 승인 게이트
 - [샌드박싱](/gateway/sandboxing) — 샌드박스 환경에서 명령 실행
 - [백그라운드 프로세스](/gateway/background-process) — 장기 실행 exec 및 프로세스 도구
-- [보안](/gateway/security) — 도구 정책 및 elevated 액세스
+- [보안](/gateway/security/) — 도구 정책 및 elevated 액세스

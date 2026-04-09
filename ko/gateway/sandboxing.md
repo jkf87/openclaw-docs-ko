@@ -277,4 +277,4 @@ scripts/sandbox-browser-setup.sh
 - [OpenShell](/gateway/openshell) -- 관리형 샌드박스 백엔드 설정, 워크스페이스 모드, 구성 참조
 - [샌드박스 vs 도구 정책 vs 상승된 권한](/gateway/sandbox-vs-tool-policy-vs-elevated) -- "왜 차단됐나요?" 디버깅
 - [멀티 에이전트 샌드박스 및 도구](/tools/multi-agent-sandbox-tools) -- 에이전트별 재정의 및 우선순위
-- [보안](/gateway/security)
+- [보안](/gateway/security/)

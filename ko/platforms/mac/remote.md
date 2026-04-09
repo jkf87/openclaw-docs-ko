@@ -58,7 +58,7 @@ title: "원격 제어"
 - 원격 호스트에서 루프백 바인드를 선호하고 SSH 또는 Tailscale을 통해 연결하십시오.
 - SSH 터널링은 엄격한 호스트 키 확인을 사용합니다. `~/.ssh/known_hosts`에 존재하도록 먼저 호스트 키를 신뢰하십시오.
 - 게이트웨이를 루프백이 아닌 인터페이스에 바인딩하는 경우 유효한 게이트웨이 인증이 필요합니다: 토큰, 비밀번호, 또는 `gateway.auth.mode: "trusted-proxy"`가 있는 ID 인식 역방향 프록시.
-- [보안](/gateway/security) 및 [Tailscale](/gateway/tailscale)을 참조하십시오.
+- [보안](/gateway/security/) 및 [Tailscale](/gateway/tailscale)을 참조하십시오.
 
 ## WhatsApp 로그인 흐름 (원격)
 

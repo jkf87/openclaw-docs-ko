@@ -322,7 +322,7 @@ flowchart TD
 
       - [/tools/exec](/tools/exec)
       - [/tools/exec-approvals](/tools/exec-approvals)
-      - [/gateway/security#runtime-expectation-drift](/gateway/security#runtime-expectation-drift)
+      - [/gateway/security#runtime-expectation-drift](/gateway/security/#runtime-expectation-drift)
 
     </Accordion>
 
