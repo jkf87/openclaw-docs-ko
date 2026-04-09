@@ -1,6 +1,0 @@
-{
-  "last_turn_at": "2026-04-08T22:35:33.817Z",
-  "turn_count": 2,
-  "last_progress_at": "2026-04-08T22:35:33.817Z",
-  "last_agent_output": "**1) 용어집**\n\n```json\n[\n  {\"source\":\"AI agent\",\"target\":\"AI 에이전트\"},\n  {\"source\":\"API\",\"target\":\"API\"},"
-}
