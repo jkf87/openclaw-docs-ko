@@ -62,6 +62,7 @@ const sections: SidebarSection[] = [
     label: '플러그인',
     prefix: '/plugins/',
     items: [
+      { text: '플러그인 아키텍처', link: '/plugins/architecture' },
       { text: 'Memory Wiki', link: '/plugins/memory-wiki' },
       { text: '에이전트 도구', link: '/plugins/agent-tools' },
       { text: '플러그인 빌드', link: '/plugins/building-plugins' },
@@ -102,6 +103,8 @@ const sections: SidebarSection[] = [
       { text: 'Bun', link: '/install/bun' },
       { text: 'ClawDock', link: '/install/clawdock' },
       { text: 'DigitalOcean', link: '/install/digitalocean' },
+      { text: 'Railway', link: '/install/railway' },
+      { text: 'Northflank', link: '/install/northflank' },
       { text: '개발 채널', link: '/install/development-channels' },
     ],
   },
@@ -161,6 +164,7 @@ const sections: SidebarSection[] = [
     prefix: '/tools/',
     collapsed: true,
     items: [
+      { text: 'ACP 에이전트', link: '/tools/acp-agents' },
       { text: 'Agent Send', link: '/tools/agent-send' },
       { text: 'Apply Patch', link: '/tools/apply-patch' },
       { text: 'Brave Search', link: '/tools/brave-search' },

@@ -25,11 +25,6 @@ export default defineConfig({
   cleanUrls: true,
   // Narrow allowlist. Re-add specific patterns here only with a TODO.
   ignoreDeadLinks: [
-    // TODO: pages still missing Korean translations
-    /^\/tools\/acp-agents(\/|$|#)/,
-    /^\/plugins\/architecture(\/|$|#)/,
-    /^\/install\/railway(\/|$|#)/,
-    /^\/install\/northflank(\/|$|#)/,
     // Local dashboard URLs documented in web/{dashboard,control-ui}.md.
     // VitePress' cleanUrls validator appends /index and 404s on them.
     /^https?:\/\/(localhost|127\.0\.0\.1):/,
