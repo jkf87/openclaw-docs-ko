@@ -1,0 +1,27 @@
+/* OpenClaw brand */
+:root {
+  --vp-c-brand-1: #FF5A36;
+  --vp-c-brand-2: #FF8A6B;
+  --vp-c-brand-3: #FFB59E;
+  --vp-c-brand-soft: rgba(255, 90, 54, 0.14);
+  --vp-home-hero-name-color: transparent;
+  --vp-home-hero-name-background: linear-gradient(135deg, #FF5A36, #FF8A6B);
+}
+
+.dark {
+  --vp-c-brand-1: #FF8A6B;
+  --vp-c-brand-2: #FF5A36;
+  --vp-c-brand-3: #CC4829;
+}
+
+/* Book banner in footer */
+.VPFooter .message a {
+  color: var(--vp-c-brand-1);
+  font-weight: 600;
+}
+
+/* Better card rendering inside slots */
+.card-group .card,
+.columns .card {
+  margin: 0;
+}
