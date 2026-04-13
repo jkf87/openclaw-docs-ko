@@ -2,22 +2,6 @@ import { defineConfig } from 'vitepress'
 import { generateSidebar } from './sidebar'
 
 export default defineConfig({
-  vue: {
-    template: {
-      compilerOptions: {
-        isCustomElement: (tag) => {
-          // Treat ALL unknown tags as custom elements instead of erroring
-          const htmlTags = new Set(['a','abbr','address','area','article','aside','audio','b','base','bdi','bdo','blockquote','body','br','button','canvas','caption','cite','code','col','colgroup','data','datalist','dd','del','details','dfn','dialog','div','dl','dt','em','embed','fieldset','figcaption','figure','footer','form','h1','h2','h3','h4','h5','h6','head','header','hgroup','hr','html','i','iframe','img','input','ins','kbd','label','legend','li','link','main','map','mark','menu','meta','meter','nav','noscript','object','ol','optgroup','option','output','p','param','picture','pre','progress','q','rp','rt','ruby','s','samp','script','section','select','slot','small','source','span','strong','style','sub','summary','sup','table','tbody','td','template','textarea','tfoot','th','thead','time','title','tr','track','u','ul','var','video','wbr'])
-          if (htmlTags.has(tag.toLowerCase())) return false
-          if (tag === 'BookBanner') return false
-          // VitePress internal
-          if (tag.startsWith('VP') || tag.startsWith('vp-')) return false
-          if (tag === 'Content' || tag === 'ClientOnly') return false
-          return true
-        },
-      },
-    },
-  },
   title: 'OpenClaw 한국어 문서',
   description: 'OpenClaw - AI 에이전트용 멀티채널 게이트웨이 한국어 문서. 이게 되네? 오픈클로 미친 활용법 50제 공식 가이드.',
   lang: 'ko-KR',
