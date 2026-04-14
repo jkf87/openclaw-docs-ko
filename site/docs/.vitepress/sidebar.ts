@@ -39,6 +39,7 @@ const sections: SidebarSection[] = [
       { text: '내장 메모리', link: '/concepts/memory-builtin' },
       { text: 'QMD 메모리', link: '/concepts/memory-qmd' },
       { text: 'Honcho 메모리', link: '/concepts/memory-honcho' },
+      { text: 'Active Memory', link: '/concepts/active-memory' },
     ],
   },
   {
