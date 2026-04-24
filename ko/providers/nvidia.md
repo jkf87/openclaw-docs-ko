@@ -1,28 +1,40 @@
 ---
-summary: "OpenClaw에서 NVIDIA의 OpenAI 호환 API 사용"
+summary: "OpenClaw에서 NVIDIA의 OpenAI 호환 API 사용하기"
 read_when:
-  - 무료로 OpenClaw에서 오픈 모델을 사용하려는 경우
-  - NVIDIA_API_KEY 설정이 필요한 경우
+  - OpenClaw에서 오픈 모델을 무료로 사용하고 싶을 때
+  - NVIDIA_API_KEY 설정이 필요할 때
 title: "NVIDIA"
 ---
 
-# NVIDIA
+NVIDIA는 오픈 모델을 무료로 사용할 수 있도록 `https://integrate.api.nvidia.com/v1`에서
+OpenAI 호환 API를 제공합니다. [build.nvidia.com](https://build.nvidia.com/settings/api-keys)에서
+발급한 API 키로 인증하십시오.
 
-NVIDIA는 오픈 모델을 무료로 제공하는 OpenAI 호환 API를 `https://integrate.api.nvidia.com/v1`에서 제공합니다. [build.nvidia.com](https://build.nvidia.com/settings/api-keys)에서 API 키로 인증하십시오.
+## 시작하기
 
-## CLI 설정
+<Steps>
+  <Step title="API 키 발급">
+    [build.nvidia.com](https://build.nvidia.com/settings/api-keys)에서 API 키를 생성합니다.
+  </Step>
+  <Step title="키 내보내기 및 온보딩 실행">
+    ```bash
+    export NVIDIA_API_KEY="nvapi-..."
+    openclaw onboard --auth-choice skip
+    ```
+  </Step>
+  <Step title="NVIDIA 모델 설정">
+    ```bash
+    openclaw models set nvidia/nvidia/nemotron-3-super-120b-a12b
+    ```
+  </Step>
+</Steps>
 
-키를 한 번 내보낸 후 온보딩을 실행하고 NVIDIA 모델을 설정하십시오:
+<Warning>
+환경 변수 대신 `--token`을 전달하면 그 값이 셸 히스토리와 `ps` 출력에 남습니다.
+가능하면 `NVIDIA_API_KEY` 환경 변수를 우선 사용하십시오.
+</Warning>
 
-```bash
-export NVIDIA_API_KEY="nvapi-..."
-openclaw onboard --auth-choice skip
-openclaw models set nvidia/nvidia/nemotron-3-super-120b-a12b
-```
-
-여전히 `--token`을 전달하는 경우 셸 히스토리 및 `ps` 출력에 노출된다는 점에 유의하십시오; 가능하면 환경 변수를 사용하십시오.
-
-## 구성 스니펫
+## 설정 예시
 
 ```json5
 {
@@ -43,17 +55,46 @@ openclaw models set nvidia/nvidia/nemotron-3-super-120b-a12b
 }
 ```
 
-## 모델 ID
+## 내장 카탈로그
 
-| 모델 참조                                  | 이름                         | 컨텍스트  | 최대 출력 |
-| ------------------------------------------ | ---------------------------- | --------- | --------- |
-| `nvidia/nvidia/nemotron-3-super-120b-a12b` | NVIDIA Nemotron 3 Super 120B | 262,144   | 8,192     |
-| `nvidia/moonshotai/kimi-k2.5`              | Kimi K2.5                    | 262,144   | 8,192     |
-| `nvidia/minimaxai/minimax-m2.5`            | Minimax M2.5                 | 196,608   | 8,192     |
-| `nvidia/z-ai/glm5`                         | GLM 5                        | 202,752   | 8,192     |
+| 모델 ref                                   | 이름                         | 컨텍스트 | 최대 출력  |
+| ------------------------------------------ | ---------------------------- | ------- | ---------- |
+| `nvidia/nvidia/nemotron-3-super-120b-a12b` | NVIDIA Nemotron 3 Super 120B | 262,144 | 8,192      |
+| `nvidia/moonshotai/kimi-k2.5`              | Kimi K2.5                    | 262,144 | 8,192      |
+| `nvidia/minimaxai/minimax-m2.5`            | Minimax M2.5                 | 196,608 | 8,192      |
+| `nvidia/z-ai/glm5`                         | GLM 5                        | 202,752 | 8,192      |
 
-## 참고 사항
+## 고급 설정
 
-- OpenAI 호환 `/v1` 엔드포인트; [build.nvidia.com](https://build.nvidia.com/)에서 API 키를 사용하십시오.
-- `NVIDIA_API_KEY`가 설정된 경우 프로바이더가 자동으로 활성화됩니다.
-- 번들 카탈로그는 정적이며; 비용은 소스에서 기본적으로 `0`입니다.
+<AccordionGroup>
+  <Accordion title="자동 활성화 동작">
+    `NVIDIA_API_KEY` 환경 변수가 설정되면 프로바이더가 자동으로 활성화됩니다.
+    키 이외의 명시적 프로바이더 설정은 필요하지 않습니다.
+  </Accordion>
+
+  <Accordion title="카탈로그와 가격 정책">
+    번들된 카탈로그는 정적입니다. NVIDIA가 현재 해당 모델들에 대해 무료 API 접근을
+    제공하므로 소스의 cost는 기본적으로 `0`으로 설정됩니다.
+  </Accordion>
+
+  <Accordion title="OpenAI 호환 엔드포인트">
+    NVIDIA는 표준 `/v1` completions 엔드포인트를 사용합니다. 모든 OpenAI 호환
+    도구는 NVIDIA base URL과 함께 별도 설정 없이 동작해야 합니다.
+  </Accordion>
+</AccordionGroup>
+
+<Tip>
+NVIDIA 모델은 현재 무료로 사용할 수 있습니다. 최신 가용성 및 rate limit 세부 사항은
+[build.nvidia.com](https://build.nvidia.com/)에서 확인하십시오.
+</Tip>
+
+## 관련 문서
+
+<CardGroup cols={2}>
+  <Card title="모델 선택" href="/concepts/model-providers" icon="layers">
+    프로바이더, 모델 ref, failover 동작 선택.
+  </Card>
+  <Card title="구성 레퍼런스" href="/gateway/configuration-reference" icon="gear">
+    agent, 모델, 프로바이더에 대한 전체 구성 레퍼런스.
+  </Card>
+</CardGroup>

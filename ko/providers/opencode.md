@@ -1,37 +1,83 @@
 ---
-summary: "OpenClaw에서 OpenCode Zen 및 Go 카탈로그 사용"
+summary: "OpenClaw에서 OpenCode Zen과 Go 카탈로그 사용하기"
 read_when:
-  - OpenCode 호스팅 모델 접근을 원하는 경우
-  - Zen 및 Go 카탈로그 중 선택하려는 경우
+  - OpenCode가 호스팅하는 모델에 접근하고 싶을 때
+  - Zen과 Go 카탈로그 중 하나를 선택하고 싶을 때
 title: "OpenCode"
 ---
 
-# OpenCode
+OpenCode는 OpenClaw에서 두 개의 호스팅 카탈로그를 제공합니다.
 
-OpenCode는 OpenClaw에서 두 가지 호스팅 카탈로그를 노출합니다:
+| 카탈로그 | 접두사            | 런타임 프로바이더 |
+| ------- | ----------------- | ---------------- |
+| **Zen** | `opencode/...`    | `opencode`       |
+| **Go**  | `opencode-go/...` | `opencode-go`    |
 
-- **Zen** 카탈로그용 `opencode/...`
-- **Go** 카탈로그용 `opencode-go/...`
+두 카탈로그 모두 동일한 OpenCode API 키를 사용합니다. OpenClaw는 상위(upstream) 모델별 라우팅이 올바르게 유지되도록 런타임 프로바이더 ID는 분리해 두지만, 온보딩과 문서에서는 하나의 OpenCode 설정으로 취급합니다.
 
-두 카탈로그는 동일한 OpenCode API 키를 사용합니다. OpenClaw는 업스트림 모델별 라우팅이 올바르게 유지되도록 런타임 프로바이더 id를 분리하지만, 온보딩과 문서는 하나의 OpenCode 설정으로 취급합니다.
+## 시작하기
 
-## CLI 설정
+<Tabs>
+  <Tab title="Zen 카탈로그">
+    **적합한 사용처:** 큐레이팅된 OpenCode 멀티모델 프록시(Claude, GPT, Gemini).
 
-### Zen 카탈로그
+    <Steps>
+      <Step title="온보딩 실행">
+        ```bash
+        openclaw onboard --auth-choice opencode-zen
+        ```
 
-```bash
-openclaw onboard --auth-choice opencode-zen
-openclaw onboard --opencode-zen-api-key "$OPENCODE_API_KEY"
-```
+        또는 키를 직접 전달할 수 있습니다.
 
-### Go 카탈로그
+        ```bash
+        openclaw onboard --opencode-zen-api-key "$OPENCODE_API_KEY"
+        ```
+      </Step>
+      <Step title="Zen 모델을 기본값으로 설정">
+        ```bash
+        openclaw config set agents.defaults.model.primary "opencode/claude-opus-4-6"
+        ```
+      </Step>
+      <Step title="사용 가능한 모델 확인">
+        ```bash
+        openclaw models list --provider opencode
+        ```
+      </Step>
+    </Steps>
 
-```bash
-openclaw onboard --auth-choice opencode-go
-openclaw onboard --opencode-go-api-key "$OPENCODE_API_KEY"
-```
+  </Tab>
 
-## 구성 스니펫
+  <Tab title="Go 카탈로그">
+    **적합한 사용처:** OpenCode가 호스팅하는 Kimi, GLM, MiniMax 라인업.
+
+    <Steps>
+      <Step title="온보딩 실행">
+        ```bash
+        openclaw onboard --auth-choice opencode-go
+        ```
+
+        또는 키를 직접 전달할 수 있습니다.
+
+        ```bash
+        openclaw onboard --opencode-go-api-key "$OPENCODE_API_KEY"
+        ```
+      </Step>
+      <Step title="Go 모델을 기본값으로 설정">
+        ```bash
+        openclaw config set agents.defaults.model.primary "opencode-go/kimi-k2.5"
+        ```
+      </Step>
+      <Step title="사용 가능한 모델 확인">
+        ```bash
+        openclaw models list --provider opencode-go
+        ```
+      </Step>
+    </Steps>
+
+  </Tab>
+</Tabs>
+
+## 설정 예시
 
 ```json5
 {
@@ -40,25 +86,57 @@ openclaw onboard --opencode-go-api-key "$OPENCODE_API_KEY"
 }
 ```
 
-## 카탈로그
+## 내장 카탈로그
 
 ### Zen
 
-- 런타임 프로바이더: `opencode`
-- 예시 모델: `opencode/claude-opus-4-6`, `opencode/gpt-5.4`, `opencode/gemini-3-pro`
-- 큐레이션된 OpenCode 멀티 모델 프록시를 원할 때 최적
+| 속성             | 값                                                                      |
+| ---------------- | ----------------------------------------------------------------------- |
+| 런타임 프로바이더 | `opencode`                                                              |
+| 예시 모델        | `opencode/claude-opus-4-6`, `opencode/gpt-5.5`, `opencode/gemini-3-pro` |
 
 ### Go
 
-- 런타임 프로바이더: `opencode-go`
-- 예시 모델: `opencode-go/kimi-k2.5`, `opencode-go/glm-5`, `opencode-go/minimax-m2.5`
-- OpenCode 호스팅 Kimi/GLM/MiniMax 라인업을 원할 때 최적
+| 속성             | 값                                                                       |
+| ---------------- | ------------------------------------------------------------------------ |
+| 런타임 프로바이더 | `opencode-go`                                                            |
+| 예시 모델        | `opencode-go/kimi-k2.5`, `opencode-go/glm-5`, `opencode-go/minimax-m2.5` |
 
-## 참고 사항
+## 고급 설정
 
-- `OPENCODE_ZEN_API_KEY`도 지원됩니다.
-- 설정 중 하나의 OpenCode 키를 입력하면 두 런타임 프로바이더 모두의 자격 증명이 저장됩니다.
-- OpenCode에 로그인하고, 청구 정보를 추가하고, API 키를 복사하십시오.
-- 청구 및 카탈로그 가용성은 OpenCode 대시보드에서 관리됩니다.
-- Gemini 기반 OpenCode 참조는 프록시-Gemini 경로에 유지되므로 OpenClaw는 네이티브 Gemini 재생 검증이나 부트스트랩 재작성을 활성화하지 않고 거기서 Gemini 사고 서명 위생을 유지합니다.
-- Gemini 이외의 OpenCode 참조는 최소한의 OpenAI 호환 재생 정책을 유지합니다.
+<AccordionGroup>
+  <Accordion title="API 키 별칭">
+    `OPENCODE_ZEN_API_KEY`도 `OPENCODE_API_KEY`의 별칭(alias)으로 지원됩니다.
+  </Accordion>
+
+  <Accordion title="공유 자격증명">
+    설정 시 하나의 OpenCode 키를 입력하면 두 런타임 프로바이더 모두에 대한 자격증명이 저장됩니다. 카탈로그별로 별도의 온보딩을 할 필요가 없습니다.
+  </Accordion>
+
+  <Accordion title="결제 및 대시보드">
+    OpenCode에 로그인하고, 결제 정보를 추가한 뒤, API 키를 복사합니다. 결제와 카탈로그 사용 가능 여부는 OpenCode 대시보드에서 관리합니다.
+  </Accordion>
+
+  <Accordion title="Gemini 리플레이 동작">
+    Gemini 기반의 OpenCode ref는 프록시 경유 Gemini 경로(proxy-Gemini path)에 머물기 때문에, OpenClaw는 네이티브 Gemini 리플레이 검증이나 부트스트랩 재작성을 활성화하지 않은 상태로 해당 경로에서 Gemini의 thought-signature 정화(sanitation)를 유지합니다.
+  </Accordion>
+
+  <Accordion title="Gemini 외 리플레이 동작">
+    Gemini가 아닌 OpenCode ref는 최소한의 OpenAI 호환 리플레이 정책을 유지합니다.
+  </Accordion>
+</AccordionGroup>
+
+<Tip>
+설정 시 하나의 OpenCode 키를 입력하면 Zen과 Go 런타임 프로바이더 모두에 대한 자격증명이 저장되므로, 한 번만 온보딩하면 됩니다.
+</Tip>
+
+## 관련 문서
+
+<CardGroup cols={2}>
+  <Card title="모델 선택" href="/concepts/model-providers" icon="layers">
+    프로바이더, 모델 ref, 페일오버 동작 선택 방법.
+  </Card>
+  <Card title="설정 레퍼런스" href="/gateway/configuration-reference" icon="gear">
+    에이전트, 모델, 프로바이더에 대한 전체 설정 레퍼런스.
+  </Card>
+</CardGroup>

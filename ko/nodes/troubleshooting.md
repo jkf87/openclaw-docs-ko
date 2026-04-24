@@ -112,7 +112,7 @@ openclaw logs --follow
 
 관련:
 
-- [/nodes/index](/nodes/index)
+- [/nodes/index](/nodes/)
 - [/nodes/camera](/nodes/camera)
 - [/nodes/location-command](/nodes/location-command)
 - [/tools/exec-approvals](/tools/exec-approvals)

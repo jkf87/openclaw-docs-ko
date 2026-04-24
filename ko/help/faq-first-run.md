@@ -65,7 +65,7 @@ sidebarTitle: "첫 실행 FAQ"
 
     작업 모드에서는 실제 heartbeat 실행이 완료된 후에만 만기 타임스탬프가 진행됩니다. 건너뛴 실행은 작업을 완료된 것으로 표시하지 않습니다.
 
-    문서: [Heartbeat](/gateway/heartbeat), [자동화 및 작업](/automation).
+    문서: [Heartbeat](/gateway/heartbeat), [자동화 및 작업](/automation/).
 
   </Accordion>
 
@@ -115,7 +115,7 @@ sidebarTitle: "첫 실행 FAQ"
     - **ID 인식 리버스 프록시**: 게이트웨이를 루프백이 아닌 신뢰할 수 있는 프록시 뒤에 두고 `gateway.auth.mode: "trusted-proxy"`를 구성한 다음 프록시 URL을 여십시오.
     - **SSH 터널**: `ssh -N -L 18789:127.0.0.1:18789 user@host` 후 `http://127.0.0.1:18789/` 열기. 공유 비밀 인증은 여전히 터널을 통해 적용됩니다. 요청 시 구성된 토큰 또는 비밀번호를 붙여넣으십시오.
 
-    바인딩 모드 및 인증 세부 사항은 [대시보드](/web/dashboard) 및 [웹 표면](/web)을 참조하십시오.
+    바인딩 모드 및 인증 세부 사항은 [대시보드](/web/dashboard) 및 [웹 표면](/web/)을 참조하십시오.
 
   </Accordion>
 
@@ -151,7 +151,7 @@ sidebarTitle: "첫 실행 FAQ"
 
     여유 공간(로그, 미디어, 기타 서비스)이 더 필요한 경우 **2GB가 권장**되지만 절대 최소값은 아닙니다.
 
-    팁: 소형 Pi/VPS가 게이트웨이를 호스팅할 수 있으며 노트북/폰에 **노드**를 페어링하여 로컬 화면/카메라/canvas 또는 명령 실행에 사용할 수 있습니다. [노드](/nodes)를 참조하십시오.
+    팁: 소형 Pi/VPS가 게이트웨이를 호스팅할 수 있으며 노트북/폰에 **노드**를 페어링하여 로컬 화면/카메라/canvas 또는 명령 실행에 사용할 수 있습니다. [노드](/nodes/)를 참조하십시오.
 
   </Accordion>
 
@@ -434,8 +434,8 @@ sidebarTitle: "첫 실행 FAQ"
 
     클라우드 게이트웨이에 **노드**(Mac/iOS/Android/헤드리스)를 페어링하여 로컬 화면/카메라/canvas에 접근하거나 게이트웨이는 클라우드에 유지하면서 노트북에서 명령을 실행할 수 있습니다.
 
-    허브: [플랫폼](/platforms). 원격 접속: [게이트웨이 원격](/gateway/remote).
-    노드: [노드](/nodes), [노드 CLI](/cli/nodes).
+    허브: [플랫폼](/platforms/). 원격 접속: [게이트웨이 원격](/gateway/remote).
+    노드: [노드](/nodes/), [노드 CLI](/cli/nodes).
 
   </Accordion>
 
@@ -597,7 +597,7 @@ sidebarTitle: "첫 실행 FAQ"
 
     **macOS 전용 도구**에만 Mac이 필요합니다. iMessage의 경우 [BlueBubbles](/channels/bluebubbles)(권장)를 사용하십시오 - BlueBubbles 서버는 모든 Mac에서 실행되며 게이트웨이는 Linux 또는 다른 곳에서 실행할 수 있습니다. 다른 macOS 전용 도구를 원하면 Mac에서 게이트웨이를 실행하거나 macOS 노드를 페어링하십시오.
 
-    문서: [BlueBubbles](/channels/bluebubbles), [노드](/nodes), [Mac 원격 모드](/platforms/mac/remote).
+    문서: [BlueBubbles](/channels/bluebubbles), [노드](/nodes/), [Mac 원격 모드](/platforms/mac/remote).
 
   </Accordion>
 
@@ -609,7 +609,7 @@ sidebarTitle: "첫 실행 FAQ"
     - Linux/VPS에서 게이트웨이를 실행하고 Messages에 로그인된 모든 Mac에서 BlueBubbles 서버를 실행합니다.
     - 가장 간단한 단일 머신 설정을 원하면 Mac에서 모든 것을 실행합니다.
 
-    문서: [BlueBubbles](/channels/bluebubbles), [노드](/nodes),
+    문서: [BlueBubbles](/channels/bluebubbles), [노드](/nodes/),
     [Mac 원격 모드](/platforms/mac/remote).
 
   </Accordion>
@@ -623,7 +623,7 @@ sidebarTitle: "첫 실행 FAQ"
     - MacBook Pro는 macOS 앱 또는 노드 호스트를 실행하고 게이트웨이에 페어링합니다.
     - `openclaw nodes status` / `openclaw nodes list`를 사용하여 확인합니다.
 
-    문서: [노드](/nodes), [노드 CLI](/cli/nodes).
+    문서: [노드](/nodes/), [노드 CLI](/cli/nodes).
 
   </Accordion>
 
@@ -741,7 +741,7 @@ sidebarTitle: "첫 실행 FAQ"
     - **전용 호스트 (VPS/Mac mini/Pi):** 상시 운영, 절전/재부팅 중단 감소, 깨끗한 권한, 실행 유지 용이.
     - **공유 노트북/데스크톱:** 테스트 및 활성 사용에는 완전히 괜찮지만 머신이 절전 또는 업데이트될 때 일시 중지가 예상됨.
 
-    두 세계 모두의 장점을 원하면 게이트웨이를 전용 호스트에 유지하고 노트북을 로컬 화면/카메라/exec 도구를 위한 **노드**로 페어링하십시오. [노드](/nodes)를 참조하십시오.
+    두 세계 모두의 장점을 원하면 게이트웨이를 전용 호스트에 유지하고 노트북을 로컬 화면/카메라/exec 도구를 위한 **노드**로 페어링하십시오. [노드](/nodes/)를 참조하십시오.
     보안 지침은 [보안](/gateway/security/)을 읽으십시오.
 
   </Accordion>

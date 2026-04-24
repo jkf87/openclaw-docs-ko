@@ -12,7 +12,7 @@ Gateway에서 채팅 채널 계정과 런타임 상태를 관리합니다.
 
 관련 문서:
 
-- 채널 가이드: [채널](/channels/index)
+- 채널 가이드: [채널](/channels/)
 - Gateway 구성: [구성](/gateway/configuration)
 
 ## 일반 명령

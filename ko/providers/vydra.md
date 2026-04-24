@@ -138,6 +138,6 @@ Vydra를 음성 프로바이더로 설정:
 
 ## 관련
 
-- [프로바이더 디렉토리](/providers/index)
+- [프로바이더 디렉토리](/providers/)
 - [이미지 생성](/tools/image-generation)
 - [비디오 생성](/tools/video-generation)

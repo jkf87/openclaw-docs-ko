@@ -34,7 +34,7 @@ Model 및 auth profile 관련 Q&A입니다. 설정, 세션, gateway, 채널 및 
 
     경험칙: 고위험 작업에는 **감당할 수 있는 최고의 model**을, 일상적인 채팅이나 요약에는 더 저렴한 model을 사용하십시오. 에이전트별로 model을 라우팅할 수 있으며 sub-agent를 사용해 긴 작업을 병렬화할 수 있습니다 (각 sub-agent는 토큰을 소비합니다). [Models](/concepts/models) 및 [Sub-agents](/tools/subagents)를 참조하십시오.
 
-    강력한 경고: 더 약하거나 과도하게 quantize된 model은 prompt injection 및 안전하지 않은 동작에 더 취약합니다. [Security](/gateway/security)를 참조하십시오.
+    강력한 경고: 더 약하거나 과도하게 quantize된 model은 prompt injection 및 안전하지 않은 동작에 더 취약합니다. [Security](/gateway/security/)를 참조하십시오.
 
     추가 컨텍스트: [Models](/concepts/models).
 
@@ -79,7 +79,7 @@ Model 및 auth profile 관련 Q&A입니다. 설정, 세션, gateway, 채널 및 
     보안 참고: 더 작거나 많이 quantize된 model은 prompt injection에 더 취약합니다. tool을 사용할 수 있는 모든 봇에는 **대형 model**을 강력히 권장합니다. 그래도 소형 model을 원한다면 sandboxing과 엄격한 tool allowlist를 활성화하십시오.
 
     문서: [Ollama](/providers/ollama), [Local models](/gateway/local-models),
-    [Model providers](/concepts/model-providers), [Security](/gateway/security),
+    [Model providers](/concepts/model-providers), [Security](/gateway/security/),
     [Sandboxing](/gateway/sandboxing).
 
   </Accordion>
