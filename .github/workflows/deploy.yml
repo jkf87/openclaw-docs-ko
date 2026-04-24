@@ -26,7 +26,7 @@ jobs:
           node-version: '20'
 
       - name: Install dependencies
-        run: npm install
+        run: npm ci
 
       - name: Prepare docs (ko/ → site/docs/)
         run: npm run docs:prepare

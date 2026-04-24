@@ -26,7 +26,6 @@
     "emoji-regex-xs": "^1.0.0",
     "esbuild": "^0.21.5",
     "estree-walker": "^2.0.2",
-    "fsevents": "^2.3.3",
     "hast-util-whitespace": "^3.0.0",
     "hookable": "^5.5.3",
     "html-void-elements": "^3.0.0",
@@ -59,5 +58,8 @@
   "devDependencies": {
     "vitepress": "^1.6.4",
     "vue": "^3.5.32"
+  },
+  "optionalDependencies": {
+    "fsevents": "^2.3.3"
   }
 }
