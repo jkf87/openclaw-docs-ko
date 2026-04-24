@@ -1,44 +1,66 @@
 ---
-summary: "번들된 `codex` 플러그인을 통한 Codex 앱 서버 하네스 설정, 선택 정책, 문제 해결"
+summary: "번들된 Codex app-server harness를 통해 OpenClaw 임베디드 agent 턴을 실행하기"
+title: "Codex harness"
 read_when:
-  - `codex/*` 모델을 Codex 앱 서버로 실행하려는 경우
-  - PI 대비 Codex 하네스의 경계와 폴백 정책을 이해해야 하는 경우
-title: "Codex Harness"
+  - 번들된 Codex app-server harness를 사용하고 싶을 때
+  - Codex 모델 참조(ref) 및 설정 예시가 필요할 때
+  - Codex 전용 배포를 위해 PI fallback을 비활성화하고 싶을 때
 ---
 
-# Codex Harness
+번들된 `codex` 플러그인은 OpenClaw가 내장 PI harness 대신 Codex app-server를 통해 임베디드 agent 턴을 실행할 수 있도록 합니다.
 
-번들된 `codex` 플러그인은 OpenClaw가 내장 PI 하네스 대신 Codex 앱 서버를 통해 임베디드 에이전트 턴을 실행할 수 있게 해줍니다.
+Codex가 저수준 agent 세션(모델 discovery, 네이티브 thread resume, 네이티브 compaction, app-server 실행)을 소유하도록 하고 싶을 때 사용하십시오. OpenClaw는 여전히 채팅 채널, 세션 파일, 모델 선택, 도구, 승인(approval), 미디어 전달 및 가시적인 transcript mirror를 소유합니다.
 
-Codex가 저수준 에이전트 세션(모델 탐색, 네이티브 스레드 재개, 네이티브 컴팩션, 앱 서버 실행)을 소유하길 원할 때 사용하세요. OpenClaw는 여전히 채팅 채널, 세션 파일, 모델 선택, 도구, 승인, 미디어 전달, 가시 전사 미러를 소유합니다.
+네이티브 Codex 턴은 OpenClaw 플러그인 훅을 공개 호환성 계층(public compatibility layer)으로 유지합니다. 이들은 in-process OpenClaw 훅이며, Codex `hooks.json` 커맨드 훅이 아닙니다:
 
-이 하네스는 기본적으로 꺼져 있습니다. `codex` 플러그인이 활성화되고 해석된 모델이 `codex/*` 모델이거나, `embeddedHarness.runtime: "codex"` 또는 `OPENCLAW_AGENT_RUNTIME=codex`를 명시적으로 강제할 때만 선택됩니다. `codex/*`를 구성하지 않으면 기존 PI, OpenAI, Anthropic, Gemini, 로컬, 커스텀 제공자 실행은 현재 동작을 유지합니다.
+- `before_prompt_build`
+- `before_compaction`, `after_compaction`
+- `llm_input`, `llm_output`
+- `after_tool_call`
+- mirror된 transcript 레코드를 위한 `before_message_write`
+- `agent_end`
 
-## 적합한 모델 접두사 선택
+번들된 플러그인은 비동기 `tool_result` 미들웨어를 추가하기 위해 Codex app-server 확장 팩토리(extension factory)를 등록할 수도 있습니다. 해당 미들웨어는 OpenClaw 동적 도구에 대해 OpenClaw가 도구를 실행한 후, 결과가 Codex에 반환되기 전에 실행됩니다. 이는 OpenClaw가 소유한 transcript tool-result 쓰기를 변환하는 공개 `tool_result_persist` 플러그인 훅과는 별개입니다.
 
-OpenClaw에는 OpenAI와 Codex 형태 접근을 위한 별도 경로가 있습니다:
+harness는 기본적으로 꺼져 있습니다. 새 설정은 OpenAI 모델 참조를 `openai/gpt-*`로 canonical하게 유지하고, 네이티브 app-server 실행을 원할 때 `embeddedHarness.runtime: "codex"` 또는 `OPENCLAW_AGENT_RUNTIME=codex`를 명시적으로 강제해야 합니다. 호환성을 위해 레거시 `codex/*` 모델 참조는 여전히 자동으로 harness를 선택합니다.
 
-| 모델 참조              | 런타임 경로                               | 사용 시점                                                                |
-| ---------------------- | ----------------------------------------- | ------------------------------------------------------------------------ |
-| `openai/gpt-5.4`       | OpenAI 제공자 (OpenClaw/PI 파이프라인)    | `OPENAI_API_KEY`로 직접 OpenAI 플랫폼 API에 접근하려는 경우              |
-| `openai-codex/gpt-5.4` | PI를 통한 OpenAI Codex OAuth 제공자       | Codex 앱 서버 하네스 없이 ChatGPT/Codex OAuth만 원하는 경우              |
-| `codex/gpt-5.4`        | 번들 Codex 제공자 + Codex 하네스          | 임베디드 에이전트 턴에 네이티브 Codex 앱 서버 실행을 원하는 경우         |
+## 올바른 모델 prefix 선택
 
-Codex 하네스는 `codex/*` 모델 참조만 주장합니다. 기존 `openai/*`, `openai-codex/*`, Anthropic, Gemini, xAI, 로컬, 커스텀 제공자 참조는 일반 경로를 유지합니다.
+OpenAI 계열 경로는 prefix별로 구분됩니다. PI를 통해 Codex OAuth를 원할 때는 `openai-codex/*`를 사용하고, 직접적인 OpenAI API 접근을 원하거나 네이티브 Codex app-server harness를 강제할 때는 `openai/*`를 사용하십시오:
 
-## 요구사항
+| Model ref                                             | Runtime 경로                                 | 사용 시점                                                                 |
+| ----------------------------------------------------- | -------------------------------------------- | ------------------------------------------------------------------------- |
+| `openai/gpt-5.4`                                      | OpenClaw/PI plumbing을 통한 OpenAI provider | `OPENAI_API_KEY`로 현재 직접 OpenAI Platform API 접근을 원할 때.          |
+| `openai-codex/gpt-5.5`                                | OpenClaw/PI를 통한 OpenAI Codex OAuth       | 기본 PI runner와 함께 ChatGPT/Codex 구독 인증을 원할 때.                  |
+| `openai/gpt-5.5` + `embeddedHarness.runtime: "codex"` | Codex app-server harness                     | 임베디드 agent 턴에 대해 네이티브 Codex app-server 실행을 원할 때.        |
 
-- 번들 `codex` 플러그인이 사용 가능한 OpenClaw.
-- Codex 앱 서버 `0.118.0` 이상.
-- 앱 서버 프로세스에서 사용 가능한 Codex 인증.
+GPT-5.5는 현재 OpenClaw에서 구독/OAuth 전용입니다. PI OAuth에는 `openai-codex/gpt-5.5`를 사용하거나, Codex app-server harness와 함께 `openai/gpt-5.5`를 사용하십시오. `openai/gpt-5.5`에 대한 직접 API-key 접근은 OpenAI가 공개 API에서 GPT-5.5를 활성화하면 지원됩니다.
 
-플러그인은 구버전 또는 버전이 없는 앱 서버 핸드셰이크를 차단합니다. 이는 OpenClaw가 테스트된 프로토콜 서페이스에만 머물도록 보장합니다.
+레거시 `codex/gpt-*` 참조는 호환성 alias로 계속 수용됩니다. 새 PI Codex OAuth 설정은 `openai-codex/gpt-*`를 사용해야 하고, 새 네이티브 app-server harness 설정은 `openai/gpt-*` 및 `embeddedHarness.runtime: "codex"`를 사용해야 합니다.
 
-라이브 및 Docker 스모크 테스트의 경우, 인증은 보통 `OPENAI_API_KEY`와 선택적 Codex CLI 파일(`~/.codex/auth.json`, `~/.codex/config.toml`)에서 옵니다. 로컬 Codex 앱 서버가 사용하는 인증 자료와 동일한 것을 사용하세요.
+`agents.defaults.imageModel`도 동일한 prefix 분기를 따릅니다. 이미지 이해를 OpenAI Codex OAuth provider 경로를 통해 실행하려면 `openai-codex/gpt-*`를 사용하십시오. 이미지 이해를 bounded Codex app-server 턴을 통해 실행하려면 `codex/gpt-*`를 사용하십시오. Codex app-server 모델은 이미지 입력 지원을 광고(advertise)해야 합니다. 텍스트 전용 Codex 모델은 미디어 턴이 시작되기 전에 실패합니다.
+
+현재 세션에 적용된 harness를 확인하려면 `/status`를 사용하십시오. 선택이 예상과 다르면 `agents/harness` 서브시스템에 대해 디버그 로깅을 활성화하고 gateway의 구조화된 `agent harness selected` 레코드를 검사하십시오. 이 레코드에는 선택된 harness id, 선택 이유, runtime/fallback 정책, 그리고 `auto` 모드에서는 각 플러그인 후보의 지원 결과가 포함됩니다.
+
+Harness 선택은 라이브 세션 제어가 아닙니다. 임베디드 턴이 실행되면 OpenClaw는 해당 세션에 선택된 harness id를 기록하고, 같은 세션 id의 이후 턴에 대해서도 계속 사용합니다. 향후 세션이 다른 harness를 사용하도록 하려면 `embeddedHarness` 설정 또는 `OPENCLAW_AGENT_RUNTIME`을 변경하십시오. 기존 대화를 PI와 Codex 간에 전환하려면 `/new` 또는 `/reset`을 사용해 새 세션을 시작하십시오. 이렇게 하면 하나의 transcript를 호환되지 않는 두 네이티브 세션 시스템을 통해 재생하는 것을 방지할 수 있습니다.
+
+harness pin 이전에 만들어진 레거시 세션은 transcript history가 있으면 PI-pinned로 취급됩니다. 설정 변경 후 해당 대화를 Codex로 전환하려면 `/new` 또는 `/reset`을 사용하십시오.
+
+`/status`는 유효한 non-PI harness를 `Fast` 옆에 표시합니다. 예: `Fast · codex`. 기본 PI harness는 `Runner: pi (embedded)`로 유지되며 별도의 harness 배지를 추가하지 않습니다.
+
+## 요구 사항
+
+- 번들된 `codex` 플러그인이 사용 가능한 OpenClaw.
+- Codex app-server `0.118.0` 이상.
+- app-server 프로세스에서 사용 가능한 Codex 인증.
+
+플러그인은 더 오래되었거나 버전이 없는 app-server 핸드셰이크를 차단합니다. 이는 OpenClaw가 테스트된 프로토콜 표면에 머물도록 합니다.
+
+라이브 및 Docker smoke 테스트의 경우, 인증은 일반적으로 `OPENAI_API_KEY`와 `~/.codex/auth.json` 및 `~/.codex/config.toml` 같은 선택적 Codex CLI 파일에서 옵니다. 로컬 Codex app-server가 사용하는 것과 동일한 인증 자료를 사용하십시오.
 
 ## 최소 설정
 
-`codex/gpt-5.4`를 사용하고, 번들 플러그인을 활성화하며, `codex` 하네스를 강제합니다:
+`openai/gpt-5.5`를 사용하고, 번들된 플러그인을 활성화하고, `codex` harness를 강제하십시오:
 
 ```json5
 {
@@ -51,7 +73,7 @@ Codex 하네스는 `codex/*` 모델 참조만 주장합니다. 기존 `openai/*`
   },
   agents: {
     defaults: {
-      model: "codex/gpt-5.4",
+      model: "openai/gpt-5.5",
       embeddedHarness: {
         runtime: "codex",
         fallback: "none",
@@ -61,7 +83,7 @@ Codex 하네스는 `codex/*` 모델 참조만 주장합니다. 기존 `openai/*`
 }
 ```
 
-설정이 `plugins.allow`를 사용한다면 거기에도 `codex`를 포함하세요:
+설정이 `plugins.allow`를 사용한다면 거기에도 `codex`를 포함하십시오:
 
 ```json5
 {
@@ -76,11 +98,11 @@ Codex 하네스는 `codex/*` 모델 참조만 주장합니다. 기존 `openai/*`
 }
 ```
 
-`agents.defaults.model` 또는 에이전트 모델을 `codex/<model>`로 설정하면 번들 `codex` 플러그인이 자동으로 활성화됩니다. 공유 설정에서는 배포 의도를 명확히 하기 위해 명시적 플러그인 엔트리가 여전히 유용합니다.
+`agents.defaults.model` 또는 agent 모델을 `codex/<model>`로 설정한 레거시 설정은 여전히 번들 `codex` 플러그인을 자동 활성화합니다. 새 설정은 `openai/<model>`과 위의 명시적 `embeddedHarness` 항목을 선호해야 합니다.
 
-## 다른 모델을 대체하지 않고 Codex 추가
+## 다른 모델을 교체하지 않고 Codex 추가하기
 
-`codex/*` 모델에는 Codex를, 그 외에는 PI를 사용하려면 `runtime: "auto"`를 유지하세요:
+레거시 `codex/*` 참조가 Codex를 선택하고 나머지는 PI를 사용하도록 하려면 `runtime: "auto"`를 유지하십시오. 새 설정의 경우, harness를 사용해야 하는 agent에 대해 명시적 `runtime: "codex"`를 선호하십시오.
 
 ```json5
 {
@@ -94,17 +116,15 @@ Codex 하네스는 `codex/*` 모델 참조만 주장합니다. 기존 `openai/*`
   agents: {
     defaults: {
       model: {
-        primary: "codex/gpt-5.4",
-        fallbacks: ["openai/gpt-5.4", "anthropic/claude-opus-4-6"],
+        primary: "openai/gpt-5.5",
+        fallbacks: ["openai/gpt-5.5", "anthropic/claude-opus-4-6"],
       },
       models: {
-        "codex/gpt-5.4": { alias: "codex" },
-        "codex/gpt-5.4-mini": { alias: "codex-mini" },
-        "openai/gpt-5.4": { alias: "gpt" },
+        "openai/gpt-5.5": { alias: "gpt" },
         "anthropic/claude-opus-4-6": { alias: "opus" },
       },
       embeddedHarness: {
-        runtime: "auto",
+        runtime: "codex",
         fallback: "pi",
       },
     },
@@ -112,22 +132,21 @@ Codex 하네스는 `codex/*` 모델 참조만 주장합니다. 기존 `openai/*`
 }
 ```
 
-이 구성에서:
+이 형태에서는:
 
-- `/model codex` 또는 `/model codex/gpt-5.4`는 Codex 앱 서버 하네스를 사용합니다.
-- `/model gpt` 또는 `/model openai/gpt-5.4`는 OpenAI 제공자 경로를 사용합니다.
-- `/model opus`는 Anthropic 제공자 경로를 사용합니다.
-- Codex 이외 모델이 선택되면 PI가 호환 하네스로 남습니다.
+- `/model gpt` 또는 `/model openai/gpt-5.5`는 이 설정에서 Codex app-server harness를 사용합니다.
+- `/model opus`는 Anthropic provider 경로를 사용합니다.
+- non-Codex 모델이 선택되면 PI가 호환성 harness로 남습니다.
 
 ## Codex 전용 배포
 
-모든 임베디드 에이전트 턴이 Codex 하네스를 사용함을 증명해야 할 때는 PI 폴백을 비활성화합니다:
+모든 임베디드 agent 턴이 Codex harness를 사용한다는 것을 증명해야 한다면 PI fallback을 비활성화하십시오:
 
 ```json5
 {
   agents: {
     defaults: {
-      model: "codex/gpt-5.4",
+      model: "openai/gpt-5.5",
       embeddedHarness: {
         runtime: "codex",
         fallback: "none",
@@ -145,11 +164,11 @@ OPENCLAW_AGENT_HARNESS_FALLBACK=none \
 openclaw gateway run
 ```
 
-폴백이 비활성화된 상태에서 Codex 플러그인이 꺼져 있거나, 요청된 모델이 `codex/*`가 아니거나, 앱 서버가 너무 오래되었거나, 앱 서버가 시작되지 않으면 OpenClaw는 조기에 실패합니다.
+fallback을 비활성화하면 Codex 플러그인이 비활성화되었거나, app-server가 너무 오래되었거나, app-server를 시작할 수 없는 경우 OpenClaw는 조기 실패합니다.
 
-## 에이전트별 Codex 설정
+## agent별 Codex
 
-한 에이전트를 Codex 전용으로 만들고, 기본 에이전트는 일반 자동 선택을 유지할 수 있습니다:
+기본 agent는 정상적인 자동 선택을 유지하면서 하나의 agent만 Codex 전용으로 만들 수 있습니다:
 
 ```json5
 {
@@ -169,7 +188,7 @@ openclaw gateway run
       {
         id: "codex",
         name: "Codex",
-        model: "codex/gpt-5.4",
+        model: "openai/gpt-5.5",
         embeddedHarness: {
           runtime: "codex",
           fallback: "none",
@@ -180,17 +199,17 @@ openclaw gateway run
 }
 ```
 
-일반 세션 명령으로 에이전트와 모델을 전환합니다. `/new`는 새 OpenClaw 세션을 만들고, 필요에 따라 Codex 하네스가 사이드카 앱 서버 스레드를 생성하거나 재개합니다. `/reset`은 해당 스레드의 OpenClaw 세션 바인딩을 지웁니다.
+agent와 모델을 전환하려면 일반 세션 명령을 사용하십시오. `/new`는 새로운 OpenClaw 세션을 생성하고, Codex harness는 필요에 따라 사이드카 app-server thread를 생성하거나 재개합니다. `/reset`은 해당 thread에 대한 OpenClaw 세션 바인딩을 지우고, 다음 턴이 현재 설정에서 harness를 다시 결정하도록 합니다.
 
-## 모델 탐색
+## 모델 discovery
 
-기본적으로 Codex 플러그인은 앱 서버에 사용 가능한 모델을 요청합니다. 탐색이 실패하거나 타임아웃되면 번들된 폴백 카탈로그를 사용합니다:
+기본적으로 Codex 플러그인은 app-server에 사용 가능한 모델을 요청합니다. discovery가 실패하거나 타임아웃되면 다음에 대해 번들된 fallback 카탈로그를 사용합니다:
 
-- `codex/gpt-5.4`
-- `codex/gpt-5.4-mini`
-- `codex/gpt-5.2`
+- GPT-5.5
+- GPT-5.4 mini
+- GPT-5.2
 
-`plugins.entries.codex.config.discovery` 아래에서 탐색을 조정할 수 있습니다:
+`plugins.entries.codex.config.discovery`에서 discovery를 튜닝할 수 있습니다:
 
 ```json5
 {
@@ -210,7 +229,7 @@ openclaw gateway run
 }
 ```
 
-시작 시 Codex를 탐색하지 않고 폴백 카탈로그에 머무르려면 탐색을 비활성화하세요:
+시작 시 Codex probing을 피하고 fallback 카탈로그를 고수하려면 discovery를 비활성화하십시오:
 
 ```json5
 {
@@ -229,15 +248,17 @@ openclaw gateway run
 }
 ```
 
-## 앱 서버 연결 및 정책
+## app-server 연결 및 정책
 
-기본적으로 플러그인은 Codex를 로컬에서 다음과 같이 시작합니다:
+기본적으로 플러그인은 다음과 같이 Codex를 로컬에서 시작합니다:
 
 ```bash
 codex app-server --listen stdio://
 ```
 
-이 기본값을 유지하면서 Codex 네이티브 정책만 조정할 수 있습니다:
+기본적으로 OpenClaw는 로컬 Codex harness 세션을 YOLO 모드로 시작합니다: `approvalPolicy: "never"`, `approvalsReviewer: "user"`, `sandbox: "danger-full-access"`. 이는 자율 heartbeat에 사용되는 신뢰된 로컬 운영자 자세(trusted local operator posture)입니다. Codex는 아무도 답할 수 없는 네이티브 승인 프롬프트에서 멈추지 않고 shell 및 네트워크 도구를 사용할 수 있습니다.
+
+Codex guardian-reviewed 승인을 opt-in하려면 `appServer.mode: "guardian"`을 설정하십시오:
 
 ```json5
 {
@@ -247,9 +268,8 @@ codex app-server --listen stdio://
         enabled: true,
         config: {
           appServer: {
-            approvalPolicy: "on-request",
-            sandbox: "workspace-write",
-            serviceTier: "priority",
+            mode: "guardian",
+            serviceTier: "fast",
           },
         },
       },
@@ -258,7 +278,11 @@ codex app-server --listen stdio://
 }
 ```
 
-이미 실행 중인 앱 서버의 경우 WebSocket 전송을 사용하세요:
+Guardian은 네이티브 Codex 승인 reviewer입니다. Codex가 sandbox를 벗어나거나, workspace 외부에 쓰거나, 네트워크 접근 같은 권한을 추가하도록 요청할 때, Codex는 해당 승인 요청을 사람에게 프롬프트하는 대신 reviewer subagent에 라우팅합니다. reviewer는 Codex의 risk framework를 적용하고 구체적인 요청을 승인 또는 거부합니다. YOLO 모드보다 더 많은 guardrail을 원하지만 여전히 무인 agent가 진행되어야 할 때 Guardian을 사용하십시오.
+
+`guardian` 프리셋은 `approvalPolicy: "on-request"`, `approvalsReviewer: "guardian_subagent"`, `sandbox: "workspace-write"`로 확장됩니다. 개별 정책 필드는 여전히 `mode`를 오버라이드하므로, 고급 배포에서는 프리셋과 명시적 선택을 혼합할 수 있습니다.
+
+이미 실행 중인 app-server의 경우 WebSocket transport를 사용하십시오:
 
 ```json5
 {
@@ -282,33 +306,34 @@ codex app-server --listen stdio://
 
 지원되는 `appServer` 필드:
 
-| 필드                | 기본값                                   | 의미                                                                             |
-| ------------------- | ---------------------------------------- | -------------------------------------------------------------------------------- |
-| `transport`         | `"stdio"`                                | `"stdio"`는 Codex를 스폰하고, `"websocket"`은 `url`에 연결합니다.                |
-| `command`           | `"codex"`                                | stdio 전송용 실행 파일.                                                          |
-| `args`              | `["app-server", "--listen", "stdio://"]` | stdio 전송용 인자.                                                               |
-| `url`               | 설정 안 됨                               | WebSocket 앱 서버 URL.                                                           |
-| `authToken`         | 설정 안 됨                               | WebSocket 전송용 베어러 토큰.                                                    |
-| `headers`           | `{}`                                     | 추가 WebSocket 헤더.                                                             |
-| `requestTimeoutMs`  | `60000`                                  | 앱 서버 제어 평면 호출 타임아웃.                                                 |
-| `approvalPolicy`    | `"never"`                                | 스레드 시작/재개/턴에 전송되는 네이티브 Codex 승인 정책.                         |
-| `sandbox`           | `"workspace-write"`                      | 스레드 시작/재개에 전송되는 네이티브 Codex 샌드박스 모드.                        |
-| `approvalsReviewer` | `"user"`                                 | `"guardian_subagent"`로 설정하면 Codex guardian이 네이티브 승인을 검토합니다.    |
-| `serviceTier`       | 설정 안 됨                               | 선택적 Codex 서비스 티어 (예: `"priority"`).                                     |
+| Field               | 기본값                                   | 의미                                                                                                        |
+| ------------------- | ---------------------------------------- | ----------------------------------------------------------------------------------------------------------- |
+| `transport`         | `"stdio"`                                | `"stdio"`는 Codex를 spawn하고, `"websocket"`은 `url`에 연결합니다.                                          |
+| `command`           | `"codex"`                                | stdio transport용 실행 파일.                                                                                |
+| `args`              | `["app-server", "--listen", "stdio://"]` | stdio transport용 인수.                                                                                     |
+| `url`               | 미설정                                   | WebSocket app-server URL.                                                                                   |
+| `authToken`         | 미설정                                   | WebSocket transport용 bearer 토큰.                                                                          |
+| `headers`           | `{}`                                     | 추가 WebSocket header.                                                                                      |
+| `requestTimeoutMs`  | `60000`                                  | app-server control-plane 호출에 대한 타임아웃.                                                              |
+| `mode`              | `"yolo"`                                 | YOLO 또는 guardian-reviewed 실행을 위한 프리셋.                                                             |
+| `approvalPolicy`    | `"never"`                                | thread start/resume/turn에 전송되는 네이티브 Codex 승인 정책.                                               |
+| `sandbox`           | `"danger-full-access"`                   | thread start/resume에 전송되는 네이티브 Codex sandbox 모드.                                                 |
+| `approvalsReviewer` | `"user"`                                 | Codex Guardian이 프롬프트를 review하도록 하려면 `"guardian_subagent"`를 사용하십시오.                       |
+| `serviceTier`       | 미설정                                   | 선택적 Codex app-server 서비스 tier: `"fast"`, `"flex"` 또는 `null`. 유효하지 않은 레거시 값은 무시됩니다. |
 
-기존 환경 변수는 해당 설정 필드가 설정되지 않은 경우 로컬 테스트용 폴백으로 여전히 작동합니다:
+이전 환경 변수는 일치하는 config 필드가 설정되지 않았을 때 로컬 테스팅용 fallback으로 여전히 작동합니다:
 
 - `OPENCLAW_CODEX_APP_SERVER_BIN`
 - `OPENCLAW_CODEX_APP_SERVER_ARGS`
+- `OPENCLAW_CODEX_APP_SERVER_MODE=yolo|guardian`
 - `OPENCLAW_CODEX_APP_SERVER_APPROVAL_POLICY`
 - `OPENCLAW_CODEX_APP_SERVER_SANDBOX`
-- `OPENCLAW_CODEX_APP_SERVER_GUARDIAN=1`
 
-반복 가능한 배포에는 설정이 권장됩니다.
+`OPENCLAW_CODEX_APP_SERVER_GUARDIAN=1`은 제거되었습니다. 대신 `plugins.entries.codex.config.appServer.mode: "guardian"`을 사용하거나, 일회성 로컬 테스팅을 위해 `OPENCLAW_CODEX_APP_SERVER_MODE=guardian`을 사용하십시오. config는 반복 가능한 배포에 선호됩니다. 플러그인 동작을 Codex harness 설정의 나머지와 동일한 review된 파일에 유지하기 때문입니다.
 
 ## 일반적인 레시피
 
-기본 stdio 전송으로 로컬 Codex 실행:
+기본 stdio transport를 사용하는 로컬 Codex:
 
 ```json5
 {
@@ -322,7 +347,7 @@ codex app-server --listen stdio://
 }
 ```
 
-PI 폴백을 비활성화한 Codex 전용 하네스 검증:
+PI fallback이 비활성화된 Codex 전용 harness 검증:
 
 ```json5
 {
@@ -339,7 +364,7 @@ PI 폴백을 비활성화한 Codex 전용 하네스 검증:
 }
 ```
 
-Guardian이 검토하는 Codex 승인:
+Guardian-reviewed Codex 승인:
 
 ```json5
 {
@@ -349,6 +374,7 @@ Guardian이 검토하는 Codex 승인:
         enabled: true,
         config: {
           appServer: {
+            mode: "guardian",
             approvalPolicy: "on-request",
             approvalsReviewer: "guardian_subagent",
             sandbox: "workspace-write",
@@ -360,7 +386,7 @@ Guardian이 검토하는 Codex 승인:
 }
 ```
 
-명시적 헤더가 있는 원격 앱 서버:
+명시적 header가 있는 원격 app-server:
 
 ```json5
 {
@@ -383,55 +409,75 @@ Guardian이 검토하는 Codex 승인:
 }
 ```
 
-모델 전환은 OpenClaw가 계속 제어합니다. OpenClaw 세션이 기존 Codex 스레드에 연결된 경우, 다음 턴은 현재 선택된 `codex/*` 모델, 제공자, 승인 정책, 샌드박스, 서비스 티어를 앱 서버에 다시 전송합니다. `codex/gpt-5.4`에서 `codex/gpt-5.2`로 전환해도 스레드 바인딩은 유지되고, Codex가 새로 선택된 모델로 계속 이어가도록 요청합니다.
+모델 전환은 OpenClaw가 제어합니다. OpenClaw 세션이 기존 Codex thread에 연결되어 있을 때, 다음 턴은 현재 선택된 OpenAI 모델, provider, 승인 정책, sandbox, service tier를 app-server에 다시 보냅니다. `openai/gpt-5.5`에서 `openai/gpt-5.2`로 전환하면 thread 바인딩은 유지되지만 새로 선택된 모델로 계속 진행하도록 Codex에 요청합니다.
 
 ## Codex 명령
 
-번들 플러그인은 `/codex`를 인증된 슬래시 명령으로 등록합니다. 이는 범용이며 OpenClaw 텍스트 명령을 지원하는 모든 채널에서 작동합니다.
+번들된 플러그인은 `/codex`를 권한 부여된(authorized) slash 명령으로 등록합니다. 이는 일반적(generic)이며 OpenClaw 텍스트 명령을 지원하는 모든 채널에서 작동합니다.
 
 일반적인 형식:
 
-- `/codex status`는 라이브 앱 서버 연결, 모델, 계정, 속도 제한, MCP 서버, 스킬을 표시합니다.
-- `/codex models`는 라이브 Codex 앱 서버 모델을 나열합니다.
-- `/codex threads [filter]`는 최근 Codex 스레드를 나열합니다.
-- `/codex resume <thread-id>`는 현재 OpenClaw 세션을 기존 Codex 스레드에 연결합니다.
-- `/codex compact`는 Codex 앱 서버에 연결된 스레드를 컴팩션하도록 요청합니다.
-- `/codex review`는 연결된 스레드에 대한 Codex 네이티브 리뷰를 시작합니다.
-- `/codex account`는 계정 및 속도 제한 상태를 표시합니다.
-- `/codex mcp`는 Codex 앱 서버 MCP 서버 상태를 나열합니다.
-- `/codex skills`는 Codex 앱 서버 스킬을 나열합니다.
+- `/codex status`는 라이브 app-server 연결성, 모델, 계정, rate limit, MCP 서버, skills를 보여줍니다.
+- `/codex models`는 라이브 Codex app-server 모델을 나열합니다.
+- `/codex threads [filter]`는 최근 Codex thread를 나열합니다.
+- `/codex resume <thread-id>`는 현재 OpenClaw 세션을 기존 Codex thread에 연결합니다.
+- `/codex compact`는 연결된 thread를 compact하도록 Codex app-server에 요청합니다.
+- `/codex review`는 연결된 thread에 대해 Codex 네이티브 review를 시작합니다.
+- `/codex account`는 계정 및 rate-limit 상태를 보여줍니다.
+- `/codex mcp`는 Codex app-server MCP 서버 상태를 나열합니다.
+- `/codex skills`는 Codex app-server skills를 나열합니다.
 
-`/codex resume`은 하네스가 일반 턴에 사용하는 것과 동일한 사이드카 바인딩 파일을 씁니다. 다음 메시지에서 OpenClaw는 해당 Codex 스레드를 재개하고, 현재 선택된 OpenClaw `codex/*` 모델을 앱 서버로 전달하며, 확장 히스토리를 활성 상태로 유지합니다.
+`/codex resume`은 일반 턴에 대해 harness가 사용하는 것과 동일한 사이드카 바인딩 파일을 작성합니다. 다음 메시지에서 OpenClaw는 해당 Codex thread를 재개하고, 현재 선택된 OpenClaw 모델을 app-server에 전달하며, extended history를 활성화된 상태로 유지합니다.
 
-명령 서페이스는 Codex 앱 서버 `0.118.0` 이상을 요구합니다. 개별 제어 메서드는, 미래 또는 커스텀 앱 서버가 해당 JSON-RPC 메서드를 노출하지 않으면 `unsupported by this Codex app-server`로 보고됩니다.
+명령 표면은 Codex app-server `0.118.0` 이상이 필요합니다. 향후 또는 커스텀 app-server가 해당 JSON-RPC 메서드를 노출하지 않으면 개별 제어 메서드는 `unsupported by this Codex app-server`로 보고됩니다.
 
-## 도구, 미디어, 컴팩션
+## 훅 경계(Hook boundaries)
 
-Codex 하네스는 저수준 임베디드 에이전트 실행기만 변경합니다.
+Codex harness에는 세 가지 훅 계층이 있습니다:
 
-OpenClaw는 여전히 도구 목록을 구성하고 하네스로부터 동적 도구 결과를 받습니다. 텍스트, 이미지, 동영상, 음악, TTS, 승인, 메시징 도구 출력은 일반 OpenClaw 전달 경로를 계속 사용합니다.
+| Layer                                 | Owner                    | 목적                                                                |
+| ------------------------------------- | ------------------------ | ------------------------------------------------------------------- |
+| OpenClaw 플러그인 훅                  | OpenClaw                 | PI와 Codex harness 간의 제품/플러그인 호환성.                       |
+| Codex app-server 확장 미들웨어        | OpenClaw 번들 플러그인   | OpenClaw 동적 도구 주변의 turn별 adapter 동작.                      |
+| Codex 네이티브 훅                     | Codex                    | Codex config의 저수준 Codex 생명주기 및 네이티브 도구 정책.         |
 
-선택된 모델이 Codex 하네스를 사용할 때 네이티브 스레드 컴팩션은 Codex 앱 서버에 위임됩니다. OpenClaw는 채널 히스토리, 검색, `/new`, `/reset`, 향후 모델/하네스 전환을 위해 전사 미러를 유지합니다. 미러에는 사용자 프롬프트, 최종 어시스턴트 텍스트, 그리고 앱 서버가 방출하는 가벼운 Codex 추론/계획 레코드가 포함됩니다.
+OpenClaw는 OpenClaw 플러그인 동작을 라우팅하기 위해 프로젝트 또는 글로벌 Codex `hooks.json` 파일을 사용하지 않습니다. Codex 네이티브 훅은 shell 정책, 네이티브 도구 결과 review, stop 처리, 네이티브 compaction/모델 생명주기 같은 Codex-소유 작업에는 유용하지만, OpenClaw 플러그인 API는 아닙니다.
 
-미디어 생성은 PI를 필요로 하지 않습니다. 이미지, 동영상, 음악, PDF, TTS, 미디어 이해는 `agents.defaults.imageGenerationModel`, `videoGenerationModel`, `pdfModel`, `messages.tts` 같은 일치하는 제공자/모델 설정을 계속 사용합니다.
+OpenClaw 동적 도구의 경우, Codex가 호출을 요청한 후 OpenClaw가 도구를 실행하므로, OpenClaw는 harness adapter에서 자신이 소유한 플러그인 및 미들웨어 동작을 발화시킵니다. Codex-네이티브 도구의 경우, Codex가 canonical 도구 레코드를 소유합니다. OpenClaw는 선택된 이벤트를 mirror할 수 있지만, Codex가 app-server 또는 네이티브 훅 콜백을 통해 해당 작업을 노출하지 않는 한 네이티브 Codex thread를 재작성할 수 없습니다.
+
+향후 Codex app-server 빌드가 네이티브 compaction 및 모델 생명주기 훅 이벤트를 노출하면, OpenClaw는 해당 프로토콜 지원을 버전 게이트(version-gate)하고 의미(semantics)가 정직한(honest) 경우 기존 OpenClaw 훅 계약으로 이벤트를 매핑해야 합니다. 그때까지는 OpenClaw의 `before_compaction`, `after_compaction`, `llm_input`, `llm_output` 이벤트는 adapter 수준의 관찰이며, Codex의 내부 요청 또는 compaction payload의 byte-for-byte 캡처가 아닙니다.
+
+## 도구, 미디어, compaction
+
+Codex harness는 저수준 임베디드 agent executor만 변경합니다.
+
+OpenClaw는 여전히 도구 목록을 빌드하고 harness에서 동적 도구 결과를 받습니다. 텍스트, 이미지, 비디오, 음악, TTS, 승인, messaging-tool 출력은 계속 일반 OpenClaw 전달 경로를 통해 진행됩니다.
+
+Codex MCP 도구 승인 elicitation은 Codex가 `_meta.codex_approval_kind`를 `"mcp_tool_call"`로 표시할 때 OpenClaw의 플러그인 승인 흐름을 통해 라우팅됩니다. Codex `request_user_input` 프롬프트는 원래 채팅으로 되돌려 보내지며, 다음 큐에 대기 중인 follow-up 메시지가 추가 컨텍스트로 steering되는 대신 해당 네이티브 서버 요청에 답합니다. 다른 MCP elicitation 요청은 여전히 fail-closed 처리됩니다.
+
+선택된 모델이 Codex harness를 사용할 때, 네이티브 thread compaction은 Codex app-server에 위임됩니다. OpenClaw는 채널 히스토리, 검색, `/new`, `/reset`, 향후 모델 또는 harness 전환을 위해 transcript mirror를 유지합니다. mirror에는 사용자 프롬프트, 최종 assistant 텍스트, app-server가 emit할 때 경량(lightweight) Codex reasoning 또는 plan 레코드가 포함됩니다. 오늘날 OpenClaw는 네이티브 compaction 시작 및 완료 신호만 기록합니다. 아직 사람이 읽을 수 있는 compaction 요약이나 compaction 후 Codex가 유지한 항목의 감사 가능한(auditable) 목록을 노출하지 않습니다.
+
+Codex가 canonical 네이티브 thread를 소유하기 때문에, `tool_result_persist`는 현재 Codex-네이티브 도구 결과 레코드를 재작성하지 않습니다. OpenClaw가 OpenClaw-소유 세션 transcript 도구 결과를 쓸 때만 적용됩니다.
+
+미디어 생성은 PI를 필요로 하지 않습니다. 이미지, 비디오, 음악, PDF, TTS 및 미디어 이해는 `agents.defaults.imageGenerationModel`, `videoGenerationModel`, `pdfModel`, `messages.tts` 같은 일치하는 provider/모델 설정을 계속 사용합니다.
 
 ## 문제 해결
 
-**`/model`에 Codex가 나타나지 않음:** `plugins.entries.codex.enabled`를 활성화하거나, `codex/*` 모델 참조를 설정하거나, `plugins.allow`가 `codex`를 제외하고 있는지 확인하세요.
+**`/model`에 Codex가 나타나지 않음:** `plugins.entries.codex.enabled`를 활성화하고, `embeddedHarness.runtime: "codex"`가 있는 `openai/gpt-*` 모델(또는 레거시 `codex/*` 참조)을 선택하며, `plugins.allow`가 `codex`를 제외하는지 확인하십시오.
 
-**OpenClaw가 PI로 폴백함:** 테스트 중에는 `embeddedHarness.fallback: "none"` 또는 `OPENCLAW_AGENT_HARNESS_FALLBACK=none`을 설정하세요.
+**OpenClaw가 Codex 대신 PI를 사용함:** Codex harness가 실행을 claim하지 않으면, OpenClaw는 호환성 백엔드로 PI를 사용할 수 있습니다. 테스팅 중 Codex 선택을 강제하려면 `embeddedHarness.runtime: "codex"`를 설정하거나, 일치하는 플러그인 harness가 없을 때 실패하도록 `embeddedHarness.fallback: "none"`을 설정하십시오. Codex app-server가 선택되면, 그 실패는 추가 fallback 설정 없이 바로 드러납니다.
 
-**앱 서버가 거부됨:** 앱 서버 핸드셰이크가 버전 `0.118.0` 이상을 보고하도록 Codex를 업그레이드하세요.
+**app-server가 거부됨:** app-server 핸드셰이크가 버전 `0.118.0` 이상을 보고하도록 Codex를 업그레이드하십시오.
 
-**모델 탐색이 느림:** `plugins.entries.codex.config.discovery.timeoutMs`를 낮추거나 탐색을 비활성화하세요.
+**모델 discovery가 느림:** `plugins.entries.codex.config.discovery.timeoutMs`를 낮추거나 discovery를 비활성화하십시오.
 
-**WebSocket 전송이 즉시 실패함:** `appServer.url`, `authToken`을 확인하고, 원격 앱 서버가 동일한 Codex 앱 서버 프로토콜 버전을 쓰는지 확인하세요.
+**WebSocket transport가 즉시 실패함:** `appServer.url`, `authToken`을 확인하고, 원격 app-server가 동일한 Codex app-server 프로토콜 버전을 사용하는지 확인하십시오.
 
-**Codex가 아닌 모델이 PI를 사용함:** 예상된 동작입니다. Codex 하네스는 `codex/*` 모델 참조만 주장합니다.
+**non-Codex 모델이 PI를 사용함:** `embeddedHarness.runtime: "codex"`를 강제하지 않는 한(또는 레거시 `codex/*` 참조를 선택하지 않는 한) 이는 예상된 동작입니다. 일반 `openai/gpt-*` 및 기타 provider 참조는 해당 provider의 일반 경로에 머뭅니다.
 
-## 관련 항목
+## 관련 문서
 
-- [에이전트 하네스 플러그인](/plugins/sdk-agent-harness)
-- [모델 제공자](/concepts/model-providers)
-- [설정 참조](/gateway/configuration-reference)
-- [테스트](/help/testing#live-codex-app-server-harness-smoke)
+- [Agent Harness 플러그인](/plugins/sdk-agent-harness)
+- [모델 Provider](/concepts/model-providers)
+- [설정 레퍼런스](/gateway/configuration-reference)
+- [테스팅](/help/testing-live#live-codex-app-server-harness-smoke)
